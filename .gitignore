@@ -1,0 +1,4 @@
+/proto/tournaments/v1/application_service.proto
+/proto/tournaments/v1/game_service.proto
+/proto/tournaments/v1/match_service.proto
+/proto/tournaments/v1/tournament_service.proto

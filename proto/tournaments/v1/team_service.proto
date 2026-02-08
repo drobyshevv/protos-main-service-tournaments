@@ -1,0 +1,199 @@
+syntax = "proto3";
+
+package tournaments.v1;
+
+option go_package = "github.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1";
+
+import "tournaments/v1/types.proto";
+
+service TeamService {
+  
+  //CRUD
+  rpc CreateTeam(CreateTeamRequest) returns (Team);
+  rpc GetTeam(GetTeamRequest) returns (Team);
+  rpc GetTeamWithPlayers(GetTeamRequest) returns (TeamWithPlayers);
+  rpc UpdateTeam(UpdateTeamRequest) returns (Team);
+  rpc DeleteTeam(DeleteTeamRequest) returns (DeleteTeamResponse);
+  rpc ListTeams(ListTeamsRequest) returns (ListTeamsResponse);
+
+  //Admin and Moderator
+  rpc BanTeam(BanTeamRequest) returns (BanTeamResponse);
+  rpc UnbanTeam(UnbanTeamRequest) returns (UnbanTeamResponse);
+
+  //Actions with the team
+  rpc JoinTeam(JoinTeamRequest) returns (JoinTeamResponse);
+  rpc LeaveTeam(LeaveTeamRequest) returns (LeaveTeamResponse);
+  rpc KickFromTeam(KickFromTeamRequest) returns (KickFromTeamResponse);
+  
+  //Img
+  rpc AddLogoTeam(AddImageTeamRequest) returns (AddImageTeamResponse);
+}
+
+
+/////////
+//CRUD///
+/////////
+
+message CreateTeamRequest {
+  string title = 1;
+  int32 size = 2; 
+  optional string description = 3;
+  int64 games_id = 4;
+  optional string img_url = 5;
+}
+
+message GetTeamRequest {
+  int64 id = 1;
+}
+
+message TeamWithPlayers {
+  Team team = 1;
+  repeated Player players = 2;
+}
+
+message UpdateTeamRequest {
+  int64 id = 1;
+  optional string title = 2;
+  optional int32 size = 3;
+  optional string description = 4;
+  optional int64 captain_id = 5;      //Проверка на нового капитана в составе команды
+  optional string img_url = 6;
+}
+
+message DeleteTeamRequest {
+  int64 id = 1;
+}
+
+//Проверка team_tounaments status = "учавствует" -> не удаляем
+//Если удаляем выводим deleted_members из таблицы users_teams
+message DeleteTeamResponse {
+  bool success = 1;   
+  string message = 2;                 
+  optional int32 deleted_members = 3;
+}
+
+message ListTeamsRequest {
+  int32 page = 1;     // Номер страницы (начинается с 1)
+  int32 page_size = 2;      // Размер страницы (10, 25, 50, 100)
+  optional string title = 3;    //По названию
+  optional int64 games_id = 4;    //По командам
+  optional int32 points_min = 5;     //Минимальные очки
+  optional int32 points_max = 6;     //Максимальные очки
+  optional bool is_baned = 7;     //Забаненные/Незабаненные команды. Если не указать покажет все
+}
+
+message ListTeamsResponse {
+  repeated Team teams = 1;
+  
+  //Metadata for pages
+  message PageInfo {
+    int32 page = 1;     //Текущая страница
+    int32 size = 2;     //Размер страницы
+    int64 total_teams = 3;      //Количество команд
+    int64 total_pages = 4;      //Количество страниц
+    bool has_next = 5;      //Есть ли следующая?
+  }
+  PageInfo page_info = 2;
+}
+
+
+
+
+///////////////////////
+//Admin and Moderator//
+///////////////////////
+
+message BanTeamRequest {
+  int64 id = 1;     //teams id 
+  string reason = 2;      //Причина бана text
+}
+
+message BanTeamResponse {
+  int64 id = 1;     //ban id
+}
+
+message UnbanTeamRequest {
+  int64 id = 1;     //teams id
+}
+
+message UnbanTeamResponse {
+  bool success = 1;
+}
+
+
+
+////////////////////////
+//Actions with the team/
+////////////////////////
+
+message JoinTeamRequest {
+  int64 user_id = 1;
+  int64 team_id = 2;
+}
+
+//Проверяем поля: size & таблица ban
+message JoinTeamResponse {
+  int64 users_teams_id = 1;
+}
+
+message LeaveTeamRequest {
+  int64 user_id = 1;
+  int64 team_id = 2;
+}
+
+// if user is_captain -> message = "Необходимо назначить нового капитана"
+// if user is_captain && size == 1 || is_captain && количество в users_teams = 1 -> DeleteTeam
+// if team in tournament -> LEAVE_STATUS_TEAM_IN_TOURNAMENT = "Команда учавствует в турнире"
+// if role admin && team not in tournament -> DeleteTeam
+message LeaveTeamResponse {
+  bool success = 1;
+  string message = 2;
+
+  enum LeaveStatus {
+    LEAVE_STATUS_UNSPECIFIED = 0;
+    LEAVE_STATUS_SUCCESS = 1;      // Успешно вышел
+    LEAVE_STATUS_LAST_MEMBER = 2;       // Последний участник → команда удалена
+    LEAVE_STATUS_NEEDS_NEW_CAPTAIN = 3;      // Нужно выбрать нового капитана
+    LEAVE_STATUS_TEAM_IN_TOURNAMENT = 4;      // Команда учавствует в турнире
+  }
+  LeaveStatus status = 3;
+}
+
+
+
+// if admin delete user from team && user is_captain -> message = "необходимо назначить капитана"
+// if team in tournament -> message = "команда учавствует в турнире"
+message KickFromTeamRequest {
+  int64 user_id = 1;
+  int64 team_id = 2;
+}
+
+message KickFromTeamResponse {
+  bool success = 1;
+  string message = 2;
+
+  enum KickStatus {
+    KICK_STATUS_UNSPECIFIED = 0;
+    KICK_STATUS_SUCCESS = 1;      // Успешно вышел
+    KICK_STATUS_LAST_MEMBER = 2;       // Последний участник → команда удалена
+    KICK_STATUS_NEEDS_NEW_CAPTAIN = 3;      // Нужно выбрать нового капитана
+    KICK_STATUS_TEAM_IN_TOURNAMENT = 4;      // Команда учавствует в турнире
+  }
+  KickStatus status = 3;
+}
+
+
+
+///////
+//Img//
+///////
+
+message AddImageTeamRequest {
+  int64 team_id = 1;      // ID команды
+  bytes image_data = 2;     // Бинарные данные (if len(image_data == 0) -> err || if len(image_data) == 5*1024*1024 -> err)
+  string filename = 3;      // "team-logo.jpg"
+}
+
+message AddImageTeamResponse {
+  Team team = 1;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package tournaments.v1;
+
+option go_package = "github.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1";
+
+import "google/protobuf/timestamp.proto";
+
+message Team {
+  int64 id = 1;
+  string title = 2;
+  int32 size = 3; 
+  optional string description = 4;
+  int32 points = 5;
+  int64 games_id = 6;
+  string img_url = 7;
+  int64 captain_id = 8;
+  optional BanInfo ban_info = 9;
+}
+
+message BanInfo {
+  int64 ban_id = 1;
+  string reason = 2;
+  google.protobuf.Timestamp banned_at = 3;
+}
+
+message Player {
+  int64 id = 1;
+  string login = 2;
+  string avatar_url = 3;
+}
