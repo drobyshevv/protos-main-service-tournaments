@@ -26,7 +26,7 @@ service TeamService {
   rpc KickFromTeam(KickFromTeamRequest) returns (KickFromTeamResponse);
   
   //Img
-  rpc AddLogoTeam(AddImageTeamRequest) returns (AddImageTeamResponse);
+  rpc UploadTeamLogo(UploadTeamLogoRequest) returns (Team);
 }
 
 
@@ -39,7 +39,6 @@ message CreateTeamRequest {
   int32 size = 2; 
   optional string description = 3;
   int64 games_id = 4;
-  optional string img_url = 5;
 }
 
 message GetTeamRequest {
@@ -57,7 +56,6 @@ message UpdateTeamRequest {
   optional int32 size = 3;
   optional string description = 4;
   optional int64 captain_id = 5;      //Проверка на нового капитана в составе команды
-  optional string img_url = 6;
 }
 
 message DeleteTeamRequest {
@@ -192,8 +190,4 @@ message AddImageTeamRequest {
   int64 team_id = 1;      // ID команды
   bytes image_data = 2;     // Бинарные данные (if len(image_data == 0) -> err || if len(image_data) == 5*1024*1024 -> err)
   string filename = 3;      // "team-logo.jpg"
-}
-
-message AddImageTeamResponse {
-  Team team = 1;
 }
