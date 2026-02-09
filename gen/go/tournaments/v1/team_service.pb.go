@@ -21,114 +21,59 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type LeaveTeamResponse_LeaveStatus int32
+type TeamMemberChangeStatus int32
 
 const (
-	LeaveTeamResponse_LEAVE_STATUS_UNSPECIFIED        LeaveTeamResponse_LeaveStatus = 0
-	LeaveTeamResponse_LEAVE_STATUS_SUCCESS            LeaveTeamResponse_LeaveStatus = 1 // Успешно вышел
-	LeaveTeamResponse_LEAVE_STATUS_LAST_MEMBER        LeaveTeamResponse_LeaveStatus = 2 // Последний участник → команда удалена
-	LeaveTeamResponse_LEAVE_STATUS_NEEDS_NEW_CAPTAIN  LeaveTeamResponse_LeaveStatus = 3 // Нужно выбрать нового капитана
-	LeaveTeamResponse_LEAVE_STATUS_TEAM_IN_TOURNAMENT LeaveTeamResponse_LeaveStatus = 4 // Команда учавствует в турнире
+	TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED        TeamMemberChangeStatus = 0
+	TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_SUCCESS            TeamMemberChangeStatus = 1 // Успешно
+	TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER        TeamMemberChangeStatus = 2 // Последний участник → команда удалена
+	TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN  TeamMemberChangeStatus = 3 // Нужно выбрать нового капитана
+	TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT TeamMemberChangeStatus = 4 // Команда участвует в турнире
 )
 
-// Enum value maps for LeaveTeamResponse_LeaveStatus.
+// Enum value maps for TeamMemberChangeStatus.
 var (
-	LeaveTeamResponse_LeaveStatus_name = map[int32]string{
-		0: "LEAVE_STATUS_UNSPECIFIED",
-		1: "LEAVE_STATUS_SUCCESS",
-		2: "LEAVE_STATUS_LAST_MEMBER",
-		3: "LEAVE_STATUS_NEEDS_NEW_CAPTAIN",
-		4: "LEAVE_STATUS_TEAM_IN_TOURNAMENT",
+	TeamMemberChangeStatus_name = map[int32]string{
+		0: "TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED",
+		1: "TEAM_MEMBER_CHANGE_STATUS_SUCCESS",
+		2: "TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER",
+		3: "TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN",
+		4: "TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT",
 	}
-	LeaveTeamResponse_LeaveStatus_value = map[string]int32{
-		"LEAVE_STATUS_UNSPECIFIED":        0,
-		"LEAVE_STATUS_SUCCESS":            1,
-		"LEAVE_STATUS_LAST_MEMBER":        2,
-		"LEAVE_STATUS_NEEDS_NEW_CAPTAIN":  3,
-		"LEAVE_STATUS_TEAM_IN_TOURNAMENT": 4,
+	TeamMemberChangeStatus_value = map[string]int32{
+		"TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED":        0,
+		"TEAM_MEMBER_CHANGE_STATUS_SUCCESS":            1,
+		"TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER":        2,
+		"TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN":  3,
+		"TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT": 4,
 	}
 )
 
-func (x LeaveTeamResponse_LeaveStatus) Enum() *LeaveTeamResponse_LeaveStatus {
-	p := new(LeaveTeamResponse_LeaveStatus)
+func (x TeamMemberChangeStatus) Enum() *TeamMemberChangeStatus {
+	p := new(TeamMemberChangeStatus)
 	*p = x
 	return p
 }
 
-func (x LeaveTeamResponse_LeaveStatus) String() string {
+func (x TeamMemberChangeStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (LeaveTeamResponse_LeaveStatus) Descriptor() protoreflect.EnumDescriptor {
+func (TeamMemberChangeStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_tournaments_v1_team_service_proto_enumTypes[0].Descriptor()
 }
 
-func (LeaveTeamResponse_LeaveStatus) Type() protoreflect.EnumType {
+func (TeamMemberChangeStatus) Type() protoreflect.EnumType {
 	return &file_tournaments_v1_team_service_proto_enumTypes[0]
 }
 
-func (x LeaveTeamResponse_LeaveStatus) Number() protoreflect.EnumNumber {
+func (x TeamMemberChangeStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use LeaveTeamResponse_LeaveStatus.Descriptor instead.
-func (LeaveTeamResponse_LeaveStatus) EnumDescriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{15, 0}
-}
-
-type KickFromTeamResponse_KickStatus int32
-
-const (
-	KickFromTeamResponse_KICK_STATUS_UNSPECIFIED        KickFromTeamResponse_KickStatus = 0
-	KickFromTeamResponse_KICK_STATUS_SUCCESS            KickFromTeamResponse_KickStatus = 1 // Успешно вышел
-	KickFromTeamResponse_KICK_STATUS_LAST_MEMBER        KickFromTeamResponse_KickStatus = 2 // Последний участник → команда удалена
-	KickFromTeamResponse_KICK_STATUS_NEEDS_NEW_CAPTAIN  KickFromTeamResponse_KickStatus = 3 // Нужно выбрать нового капитана
-	KickFromTeamResponse_KICK_STATUS_TEAM_IN_TOURNAMENT KickFromTeamResponse_KickStatus = 4 // Команда учавствует в турнире
-)
-
-// Enum value maps for KickFromTeamResponse_KickStatus.
-var (
-	KickFromTeamResponse_KickStatus_name = map[int32]string{
-		0: "KICK_STATUS_UNSPECIFIED",
-		1: "KICK_STATUS_SUCCESS",
-		2: "KICK_STATUS_LAST_MEMBER",
-		3: "KICK_STATUS_NEEDS_NEW_CAPTAIN",
-		4: "KICK_STATUS_TEAM_IN_TOURNAMENT",
-	}
-	KickFromTeamResponse_KickStatus_value = map[string]int32{
-		"KICK_STATUS_UNSPECIFIED":        0,
-		"KICK_STATUS_SUCCESS":            1,
-		"KICK_STATUS_LAST_MEMBER":        2,
-		"KICK_STATUS_NEEDS_NEW_CAPTAIN":  3,
-		"KICK_STATUS_TEAM_IN_TOURNAMENT": 4,
-	}
-)
-
-func (x KickFromTeamResponse_KickStatus) Enum() *KickFromTeamResponse_KickStatus {
-	p := new(KickFromTeamResponse_KickStatus)
-	*p = x
-	return p
-}
-
-func (x KickFromTeamResponse_KickStatus) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (KickFromTeamResponse_KickStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_tournaments_v1_team_service_proto_enumTypes[1].Descriptor()
-}
-
-func (KickFromTeamResponse_KickStatus) Type() protoreflect.EnumType {
-	return &file_tournaments_v1_team_service_proto_enumTypes[1]
-}
-
-func (x KickFromTeamResponse_KickStatus) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use KickFromTeamResponse_KickStatus.Descriptor instead.
-func (KickFromTeamResponse_KickStatus) EnumDescriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{17, 0}
+// Deprecated: Use TeamMemberChangeStatus.Descriptor instead.
+func (TeamMemberChangeStatus) EnumDescriptor() ([]byte, []int) {
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{0}
 }
 
 type CreateTeamRequest struct {
@@ -137,7 +82,8 @@ type CreateTeamRequest struct {
 	Size          int32                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
 	Description   *string                `protobuf:"bytes,3,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	GamesId       int64                  `protobuf:"varint,4,opt,name=games_id,json=gamesId,proto3" json:"games_id,omitempty"`
-	ImgUrl        *string                `protobuf:"bytes,5,opt,name=img_url,json=imgUrl,proto3,oneof" json:"img_url,omitempty"`
+	CaptainId     int64                  `protobuf:"varint,5,opt,name=captain_id,json=captainId,proto3" json:"captain_id,omitempty"`
+	Logo          *TeamLogo              `protobuf:"bytes,6,opt,name=logo,proto3,oneof" json:"logo,omitempty"` //Опционально при создании добавить logo
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -200,11 +146,18 @@ func (x *CreateTeamRequest) GetGamesId() int64 {
 	return 0
 }
 
-func (x *CreateTeamRequest) GetImgUrl() string {
-	if x != nil && x.ImgUrl != nil {
-		return *x.ImgUrl
+func (x *CreateTeamRequest) GetCaptainId() int64 {
+	if x != nil {
+		return x.CaptainId
 	}
-	return ""
+	return 0
+}
+
+func (x *CreateTeamRequest) GetLogo() *TeamLogo {
+	if x != nil {
+		return x.Logo
+	}
+	return nil
 }
 
 type GetTeamRequest struct {
@@ -251,58 +204,6 @@ func (x *GetTeamRequest) GetId() int64 {
 	return 0
 }
 
-type TeamWithPlayers struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Team          *Team                  `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
-	Players       []*Player              `protobuf:"bytes,2,rep,name=players,proto3" json:"players,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TeamWithPlayers) Reset() {
-	*x = TeamWithPlayers{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TeamWithPlayers) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TeamWithPlayers) ProtoMessage() {}
-
-func (x *TeamWithPlayers) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TeamWithPlayers.ProtoReflect.Descriptor instead.
-func (*TeamWithPlayers) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *TeamWithPlayers) GetTeam() *Team {
-	if x != nil {
-		return x.Team
-	}
-	return nil
-}
-
-func (x *TeamWithPlayers) GetPlayers() []*Player {
-	if x != nil {
-		return x.Players
-	}
-	return nil
-}
-
 type UpdateTeamRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -310,14 +211,14 @@ type UpdateTeamRequest struct {
 	Size          *int32                 `protobuf:"varint,3,opt,name=size,proto3,oneof" json:"size,omitempty"`
 	Description   *string                `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	CaptainId     *int64                 `protobuf:"varint,5,opt,name=captain_id,json=captainId,proto3,oneof" json:"captain_id,omitempty"` //Проверка на нового капитана в составе команды
-	ImgUrl        *string                `protobuf:"bytes,6,opt,name=img_url,json=imgUrl,proto3,oneof" json:"img_url,omitempty"`
+	Logo          *TeamLogo              `protobuf:"bytes,6,opt,name=logo,proto3,oneof" json:"logo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateTeamRequest) Reset() {
 	*x = UpdateTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[3]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -329,7 +230,7 @@ func (x *UpdateTeamRequest) String() string {
 func (*UpdateTeamRequest) ProtoMessage() {}
 
 func (x *UpdateTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[3]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -342,7 +243,7 @@ func (x *UpdateTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTeamRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{3}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateTeamRequest) GetId() int64 {
@@ -380,11 +281,11 @@ func (x *UpdateTeamRequest) GetCaptainId() int64 {
 	return 0
 }
 
-func (x *UpdateTeamRequest) GetImgUrl() string {
-	if x != nil && x.ImgUrl != nil {
-		return *x.ImgUrl
+func (x *UpdateTeamRequest) GetLogo() *TeamLogo {
+	if x != nil {
+		return x.Logo
 	}
-	return ""
+	return nil
 }
 
 type DeleteTeamRequest struct {
@@ -396,7 +297,7 @@ type DeleteTeamRequest struct {
 
 func (x *DeleteTeamRequest) Reset() {
 	*x = DeleteTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[4]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -408,7 +309,7 @@ func (x *DeleteTeamRequest) String() string {
 func (*DeleteTeamRequest) ProtoMessage() {}
 
 func (x *DeleteTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[4]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -421,7 +322,7 @@ func (x *DeleteTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTeamRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{4}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeleteTeamRequest) GetId() int64 {
@@ -444,7 +345,7 @@ type DeleteTeamResponse struct {
 
 func (x *DeleteTeamResponse) Reset() {
 	*x = DeleteTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[5]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -456,7 +357,7 @@ func (x *DeleteTeamResponse) String() string {
 func (*DeleteTeamResponse) ProtoMessage() {}
 
 func (x *DeleteTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[5]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -469,7 +370,7 @@ func (x *DeleteTeamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTeamResponse.ProtoReflect.Descriptor instead.
 func (*DeleteTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{5}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteTeamResponse) GetSuccess() bool {
@@ -508,7 +409,7 @@ type ListTeamsRequest struct {
 
 func (x *ListTeamsRequest) Reset() {
 	*x = ListTeamsRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[6]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -520,7 +421,7 @@ func (x *ListTeamsRequest) String() string {
 func (*ListTeamsRequest) ProtoMessage() {}
 
 func (x *ListTeamsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[6]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -533,7 +434,7 @@ func (x *ListTeamsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTeamsRequest.ProtoReflect.Descriptor instead.
 func (*ListTeamsRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{6}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListTeamsRequest) GetPage() int32 {
@@ -595,7 +496,7 @@ type ListTeamsResponse struct {
 
 func (x *ListTeamsResponse) Reset() {
 	*x = ListTeamsResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[7]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -607,7 +508,7 @@ func (x *ListTeamsResponse) String() string {
 func (*ListTeamsResponse) ProtoMessage() {}
 
 func (x *ListTeamsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[7]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +521,7 @@ func (x *ListTeamsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTeamsResponse.ProtoReflect.Descriptor instead.
 func (*ListTeamsResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{7}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListTeamsResponse) GetTeams() []*Team {
@@ -647,7 +548,7 @@ type BanTeamRequest struct {
 
 func (x *BanTeamRequest) Reset() {
 	*x = BanTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[8]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -659,7 +560,7 @@ func (x *BanTeamRequest) String() string {
 func (*BanTeamRequest) ProtoMessage() {}
 
 func (x *BanTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[8]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -672,7 +573,7 @@ func (x *BanTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BanTeamRequest.ProtoReflect.Descriptor instead.
 func (*BanTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{8}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BanTeamRequest) GetId() int64 {
@@ -689,50 +590,6 @@ func (x *BanTeamRequest) GetReason() string {
 	return ""
 }
 
-type BanTeamResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` //ban id
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BanTeamResponse) Reset() {
-	*x = BanTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BanTeamResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BanTeamResponse) ProtoMessage() {}
-
-func (x *BanTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BanTeamResponse.ProtoReflect.Descriptor instead.
-func (*BanTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *BanTeamResponse) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
 type UnbanTeamRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` //teams id
@@ -742,7 +599,7 @@ type UnbanTeamRequest struct {
 
 func (x *UnbanTeamRequest) Reset() {
 	*x = UnbanTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[10]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -754,7 +611,7 @@ func (x *UnbanTeamRequest) String() string {
 func (*UnbanTeamRequest) ProtoMessage() {}
 
 func (x *UnbanTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[10]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -767,7 +624,7 @@ func (x *UnbanTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnbanTeamRequest.ProtoReflect.Descriptor instead.
 func (*UnbanTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{10}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UnbanTeamRequest) GetId() int64 {
@@ -775,50 +632,6 @@ func (x *UnbanTeamRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
-}
-
-type UnbanTeamResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnbanTeamResponse) Reset() {
-	*x = UnbanTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnbanTeamResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnbanTeamResponse) ProtoMessage() {}
-
-func (x *UnbanTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnbanTeamResponse.ProtoReflect.Descriptor instead.
-func (*UnbanTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *UnbanTeamResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
 }
 
 type JoinTeamRequest struct {
@@ -831,7 +644,7 @@ type JoinTeamRequest struct {
 
 func (x *JoinTeamRequest) Reset() {
 	*x = JoinTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[12]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -843,7 +656,7 @@ func (x *JoinTeamRequest) String() string {
 func (*JoinTeamRequest) ProtoMessage() {}
 
 func (x *JoinTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[12]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -856,7 +669,7 @@ func (x *JoinTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinTeamRequest.ProtoReflect.Descriptor instead.
 func (*JoinTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{12}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *JoinTeamRequest) GetUserId() int64 {
@@ -877,13 +690,14 @@ func (x *JoinTeamRequest) GetTeamId() int64 {
 type JoinTeamResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UsersTeamsId  int64                  `protobuf:"varint,1,opt,name=users_teams_id,json=usersTeamsId,proto3" json:"users_teams_id,omitempty"`
+	Team          *TeamWithPlayers       `protobuf:"bytes,2,opt,name=team,proto3" json:"team,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *JoinTeamResponse) Reset() {
 	*x = JoinTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[13]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -895,7 +709,7 @@ func (x *JoinTeamResponse) String() string {
 func (*JoinTeamResponse) ProtoMessage() {}
 
 func (x *JoinTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[13]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -908,7 +722,7 @@ func (x *JoinTeamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinTeamResponse.ProtoReflect.Descriptor instead.
 func (*JoinTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{13}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *JoinTeamResponse) GetUsersTeamsId() int64 {
@@ -916,6 +730,13 @@ func (x *JoinTeamResponse) GetUsersTeamsId() int64 {
 		return x.UsersTeamsId
 	}
 	return 0
+}
+
+func (x *JoinTeamResponse) GetTeam() *TeamWithPlayers {
+	if x != nil {
+		return x.Team
+	}
+	return nil
 }
 
 type LeaveTeamRequest struct {
@@ -928,7 +749,7 @@ type LeaveTeamRequest struct {
 
 func (x *LeaveTeamRequest) Reset() {
 	*x = LeaveTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[14]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -940,7 +761,7 @@ func (x *LeaveTeamRequest) String() string {
 func (*LeaveTeamRequest) ProtoMessage() {}
 
 func (x *LeaveTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[14]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -953,7 +774,7 @@ func (x *LeaveTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LeaveTeamRequest.ProtoReflect.Descriptor instead.
 func (*LeaveTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{14}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *LeaveTeamRequest) GetUserId() int64 {
@@ -975,17 +796,18 @@ func (x *LeaveTeamRequest) GetTeamId() int64 {
 // if team in tournament -> LEAVE_STATUS_TEAM_IN_TOURNAMENT = "Команда учавствует в турнире"
 // if role admin && team not in tournament -> DeleteTeam
 type LeaveTeamResponse struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Success       bool                          `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                        `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	Status        LeaveTeamResponse_LeaveStatus `protobuf:"varint,3,opt,name=status,proto3,enum=tournaments.v1.LeaveTeamResponse_LeaveStatus" json:"status,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Status        TeamMemberChangeStatus `protobuf:"varint,3,opt,name=status,proto3,enum=tournaments.v1.TeamMemberChangeStatus" json:"status,omitempty"`
+	Team          *TeamWithPlayers       `protobuf:"bytes,4,opt,name=team,proto3,oneof" json:"team,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *LeaveTeamResponse) Reset() {
 	*x = LeaveTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[15]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -997,7 +819,7 @@ func (x *LeaveTeamResponse) String() string {
 func (*LeaveTeamResponse) ProtoMessage() {}
 
 func (x *LeaveTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[15]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1010,7 +832,7 @@ func (x *LeaveTeamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LeaveTeamResponse.ProtoReflect.Descriptor instead.
 func (*LeaveTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{15}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LeaveTeamResponse) GetSuccess() bool {
@@ -1027,11 +849,18 @@ func (x *LeaveTeamResponse) GetMessage() string {
 	return ""
 }
 
-func (x *LeaveTeamResponse) GetStatus() LeaveTeamResponse_LeaveStatus {
+func (x *LeaveTeamResponse) GetStatus() TeamMemberChangeStatus {
 	if x != nil {
 		return x.Status
 	}
-	return LeaveTeamResponse_LEAVE_STATUS_UNSPECIFIED
+	return TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED
+}
+
+func (x *LeaveTeamResponse) GetTeam() *TeamWithPlayers {
+	if x != nil {
+		return x.Team
+	}
+	return nil
 }
 
 // if admin delete user from team && user is_captain -> message = "необходимо назначить капитана"
@@ -1046,7 +875,7 @@ type KickFromTeamRequest struct {
 
 func (x *KickFromTeamRequest) Reset() {
 	*x = KickFromTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[16]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1058,7 +887,7 @@ func (x *KickFromTeamRequest) String() string {
 func (*KickFromTeamRequest) ProtoMessage() {}
 
 func (x *KickFromTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[16]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1071,7 +900,7 @@ func (x *KickFromTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KickFromTeamRequest.ProtoReflect.Descriptor instead.
 func (*KickFromTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{16}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *KickFromTeamRequest) GetUserId() int64 {
@@ -1089,17 +918,18 @@ func (x *KickFromTeamRequest) GetTeamId() int64 {
 }
 
 type KickFromTeamResponse struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	Success       bool                            `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                          `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	Status        KickFromTeamResponse_KickStatus `protobuf:"varint,3,opt,name=status,proto3,enum=tournaments.v1.KickFromTeamResponse_KickStatus" json:"status,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Status        TeamMemberChangeStatus `protobuf:"varint,3,opt,name=status,proto3,enum=tournaments.v1.TeamMemberChangeStatus" json:"status,omitempty"`
+	Team          *TeamWithPlayers       `protobuf:"bytes,4,opt,name=team,proto3,oneof" json:"team,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *KickFromTeamResponse) Reset() {
 	*x = KickFromTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[17]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1111,7 +941,7 @@ func (x *KickFromTeamResponse) String() string {
 func (*KickFromTeamResponse) ProtoMessage() {}
 
 func (x *KickFromTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[17]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1124,7 +954,7 @@ func (x *KickFromTeamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KickFromTeamResponse.ProtoReflect.Descriptor instead.
 func (*KickFromTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{17}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *KickFromTeamResponse) GetSuccess() bool {
@@ -1141,37 +971,43 @@ func (x *KickFromTeamResponse) GetMessage() string {
 	return ""
 }
 
-func (x *KickFromTeamResponse) GetStatus() KickFromTeamResponse_KickStatus {
+func (x *KickFromTeamResponse) GetStatus() TeamMemberChangeStatus {
 	if x != nil {
 		return x.Status
 	}
-	return KickFromTeamResponse_KICK_STATUS_UNSPECIFIED
+	return TeamMemberChangeStatus_TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED
 }
 
-type AddImageTeamRequest struct {
+func (x *KickFromTeamResponse) GetTeam() *TeamWithPlayers {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
+type AddTeamLogoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        int64                  `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`         // ID команды
-	ImageData     []byte                 `protobuf:"bytes,2,opt,name=image_data,json=imageData,proto3" json:"image_data,omitempty"` // Бинарные данные (if len(image_data == 0) -> err || if len(image_data) == 5*1024*1024 -> err)
-	Filename      string                 `protobuf:"bytes,3,opt,name=filename,proto3" json:"filename,omitempty"`                    // "team-logo.jpg"
+	TeamId        int64                  `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"` // ID команды
+	Logo          *TeamLogo              `protobuf:"bytes,2,opt,name=logo,proto3" json:"logo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddImageTeamRequest) Reset() {
-	*x = AddImageTeamRequest{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[18]
+func (x *AddTeamLogoRequest) Reset() {
+	*x = AddTeamLogoRequest{}
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddImageTeamRequest) String() string {
+func (x *AddTeamLogoRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddImageTeamRequest) ProtoMessage() {}
+func (*AddTeamLogoRequest) ProtoMessage() {}
 
-func (x *AddImageTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[18]
+func (x *AddTeamLogoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1182,54 +1018,48 @@ func (x *AddImageTeamRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddImageTeamRequest.ProtoReflect.Descriptor instead.
-func (*AddImageTeamRequest) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{18}
+// Deprecated: Use AddTeamLogoRequest.ProtoReflect.Descriptor instead.
+func (*AddTeamLogoRequest) Descriptor() ([]byte, []int) {
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *AddImageTeamRequest) GetTeamId() int64 {
+func (x *AddTeamLogoRequest) GetTeamId() int64 {
 	if x != nil {
 		return x.TeamId
 	}
 	return 0
 }
 
-func (x *AddImageTeamRequest) GetImageData() []byte {
+func (x *AddTeamLogoRequest) GetLogo() *TeamLogo {
 	if x != nil {
-		return x.ImageData
+		return x.Logo
 	}
 	return nil
 }
 
-func (x *AddImageTeamRequest) GetFilename() string {
-	if x != nil {
-		return x.Filename
-	}
-	return ""
-}
-
-type AddImageTeamResponse struct {
+// Вставляем стандартную картинку
+type DeleteImageLogoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Team          *Team                  `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
+	TeamId        int64                  `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddImageTeamResponse) Reset() {
-	*x = AddImageTeamResponse{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[19]
+func (x *DeleteImageLogoRequest) Reset() {
+	*x = DeleteImageLogoRequest{}
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddImageTeamResponse) String() string {
+func (x *DeleteImageLogoRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddImageTeamResponse) ProtoMessage() {}
+func (*DeleteImageLogoRequest) ProtoMessage() {}
 
-func (x *AddImageTeamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[19]
+func (x *DeleteImageLogoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1240,16 +1070,16 @@ func (x *AddImageTeamResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddImageTeamResponse.ProtoReflect.Descriptor instead.
-func (*AddImageTeamResponse) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{19}
+// Deprecated: Use DeleteImageLogoRequest.ProtoReflect.Descriptor instead.
+func (*DeleteImageLogoRequest) Descriptor() ([]byte, []int) {
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *AddImageTeamResponse) GetTeam() *Team {
+func (x *DeleteImageLogoRequest) GetTeamId() int64 {
 	if x != nil {
-		return x.Team
+		return x.TeamId
 	}
-	return nil
+	return 0
 }
 
 // Metadata for pages
@@ -1266,7 +1096,7 @@ type ListTeamsResponse_PageInfo struct {
 
 func (x *ListTeamsResponse_PageInfo) Reset() {
 	*x = ListTeamsResponse_PageInfo{}
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[20]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1278,7 +1108,7 @@ func (x *ListTeamsResponse_PageInfo) String() string {
 func (*ListTeamsResponse_PageInfo) ProtoMessage() {}
 
 func (x *ListTeamsResponse_PageInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_team_service_proto_msgTypes[20]
+	mi := &file_tournaments_v1_team_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1291,7 +1121,7 @@ func (x *ListTeamsResponse_PageInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTeamsResponse_PageInfo.ProtoReflect.Descriptor instead.
 func (*ListTeamsResponse_PageInfo) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{7, 0}
+	return file_tournaments_v1_team_service_proto_rawDescGZIP(), []int{6, 0}
 }
 
 func (x *ListTeamsResponse_PageInfo) GetPage() int32 {
@@ -1333,35 +1163,32 @@ var File_tournaments_v1_team_service_proto protoreflect.FileDescriptor
 
 const file_tournaments_v1_team_service_proto_rawDesc = "" +
 	"\n" +
-	"!tournaments/v1/team_service.proto\x12\x0etournaments.v1\x1a\x1atournaments/v1/types.proto\"\xb9\x01\n" +
+	"!tournaments/v1/team_service.proto\x12\x0etournaments.v1\x1a\x1atournaments/v1/types.proto\"\xea\x01\n" +
 	"\x11CreateTeamRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x12\n" +
 	"\x04size\x18\x02 \x01(\x05R\x04size\x12%\n" +
 	"\vdescription\x18\x03 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x19\n" +
-	"\bgames_id\x18\x04 \x01(\x03R\agamesId\x12\x1c\n" +
-	"\aimg_url\x18\x05 \x01(\tH\x01R\x06imgUrl\x88\x01\x01B\x0e\n" +
-	"\f_descriptionB\n" +
+	"\bgames_id\x18\x04 \x01(\x03R\agamesId\x12\x1d\n" +
 	"\n" +
-	"\b_img_url\" \n" +
+	"captain_id\x18\x05 \x01(\x03R\tcaptainId\x121\n" +
+	"\x04logo\x18\x06 \x01(\v2\x18.tournaments.v1.TeamLogoH\x01R\x04logo\x88\x01\x01B\x0e\n" +
+	"\f_descriptionB\a\n" +
+	"\x05_logo\" \n" +
 	"\x0eGetTeamRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"m\n" +
-	"\x0fTeamWithPlayers\x12(\n" +
-	"\x04team\x18\x01 \x01(\v2\x14.tournaments.v1.TeamR\x04team\x120\n" +
-	"\aplayers\x18\x02 \x03(\v2\x16.tournaments.v1.PlayerR\aplayers\"\xfe\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x90\x02\n" +
 	"\x11UpdateTeamRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\x05title\x18\x02 \x01(\tH\x00R\x05title\x88\x01\x01\x12\x17\n" +
 	"\x04size\x18\x03 \x01(\x05H\x01R\x04size\x88\x01\x01\x12%\n" +
 	"\vdescription\x18\x04 \x01(\tH\x02R\vdescription\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"captain_id\x18\x05 \x01(\x03H\x03R\tcaptainId\x88\x01\x01\x12\x1c\n" +
-	"\aimg_url\x18\x06 \x01(\tH\x04R\x06imgUrl\x88\x01\x01B\b\n" +
+	"captain_id\x18\x05 \x01(\x03H\x03R\tcaptainId\x88\x01\x01\x121\n" +
+	"\x04logo\x18\x06 \x01(\v2\x18.tournaments.v1.TeamLogoH\x04R\x04logo\x88\x01\x01B\b\n" +
 	"\x06_titleB\a\n" +
 	"\x05_sizeB\x0e\n" +
 	"\f_descriptionB\r\n" +
-	"\v_captain_idB\n" +
-	"\n" +
-	"\b_img_url\"#\n" +
+	"\v_captain_idB\a\n" +
+	"\x05_logo\"#\n" +
 	"\x11DeleteTeamRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x8a\x01\n" +
 	"\x12DeleteTeamResponse\x12\x18\n" +
@@ -1397,52 +1224,44 @@ const file_tournaments_v1_team_service_proto_rawDesc = "" +
 	"\bhas_next\x18\x05 \x01(\bR\ahasNext\"8\n" +
 	"\x0eBanTeamRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\"!\n" +
-	"\x0fBanTeamResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\"\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\"\"\n" +
 	"\x10UnbanTeamRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"-\n" +
-	"\x11UnbanTeamResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"C\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"C\n" +
 	"\x0fJoinTeamRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"8\n" +
+	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"m\n" +
 	"\x10JoinTeamResponse\x12$\n" +
-	"\x0eusers_teams_id\x18\x01 \x01(\x03R\fusersTeamsId\"D\n" +
+	"\x0eusers_teams_id\x18\x01 \x01(\x03R\fusersTeamsId\x123\n" +
+	"\x04team\x18\x02 \x01(\v2\x1f.tournaments.v1.TeamWithPlayersR\x04team\"D\n" +
 	"\x10LeaveTeamRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"\xbd\x02\n" +
+	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"\xca\x01\n" +
 	"\x11LeaveTeamResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12E\n" +
-	"\x06status\x18\x03 \x01(\x0e2-.tournaments.v1.LeaveTeamResponse.LeaveStatusR\x06status\"\xac\x01\n" +
-	"\vLeaveStatus\x12\x1c\n" +
-	"\x18LEAVE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n" +
-	"\x14LEAVE_STATUS_SUCCESS\x10\x01\x12\x1c\n" +
-	"\x18LEAVE_STATUS_LAST_MEMBER\x10\x02\x12\"\n" +
-	"\x1eLEAVE_STATUS_NEEDS_NEW_CAPTAIN\x10\x03\x12#\n" +
-	"\x1fLEAVE_STATUS_TEAM_IN_TOURNAMENT\x10\x04\"G\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
+	"\x06status\x18\x03 \x01(\x0e2&.tournaments.v1.TeamMemberChangeStatusR\x06status\x128\n" +
+	"\x04team\x18\x04 \x01(\v2\x1f.tournaments.v1.TeamWithPlayersH\x00R\x04team\x88\x01\x01B\a\n" +
+	"\x05_team\"G\n" +
 	"\x13KickFromTeamRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"\xbc\x02\n" +
+	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"\xcd\x01\n" +
 	"\x14KickFromTeamResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12G\n" +
-	"\x06status\x18\x03 \x01(\x0e2/.tournaments.v1.KickFromTeamResponse.KickStatusR\x06status\"\xa6\x01\n" +
-	"\n" +
-	"KickStatus\x12\x1b\n" +
-	"\x17KICK_STATUS_UNSPECIFIED\x10\x00\x12\x17\n" +
-	"\x13KICK_STATUS_SUCCESS\x10\x01\x12\x1b\n" +
-	"\x17KICK_STATUS_LAST_MEMBER\x10\x02\x12!\n" +
-	"\x1dKICK_STATUS_NEEDS_NEW_CAPTAIN\x10\x03\x12\"\n" +
-	"\x1eKICK_STATUS_TEAM_IN_TOURNAMENT\x10\x04\"i\n" +
-	"\x13AddImageTeamRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x03R\x06teamId\x12\x1d\n" +
-	"\n" +
-	"image_data\x18\x02 \x01(\fR\timageData\x12\x1a\n" +
-	"\bfilename\x18\x03 \x01(\tR\bfilename\"@\n" +
-	"\x14AddImageTeamResponse\x12(\n" +
-	"\x04team\x18\x01 \x01(\v2\x14.tournaments.v1.TeamR\x04team2\xce\a\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
+	"\x06status\x18\x03 \x01(\x0e2&.tournaments.v1.TeamMemberChangeStatusR\x06status\x128\n" +
+	"\x04team\x18\x04 \x01(\v2\x1f.tournaments.v1.TeamWithPlayersH\x00R\x04team\x88\x01\x01B\a\n" +
+	"\x05_team\"[\n" +
+	"\x12AddTeamLogoRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x03R\x06teamId\x12,\n" +
+	"\x04logo\x18\x02 \x01(\v2\x18.tournaments.v1.TeamLogoR\x04logo\"1\n" +
+	"\x16DeleteImageLogoRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x03R\x06teamId*\xf8\x01\n" +
+	"\x16TeamMemberChangeStatus\x12)\n" +
+	"%TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED\x10\x00\x12%\n" +
+	"!TEAM_MEMBER_CHANGE_STATUS_SUCCESS\x10\x01\x12)\n" +
+	"%TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER\x10\x02\x12/\n" +
+	"+TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN\x10\x03\x120\n" +
+	",TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT\x10\x042\xf6\a\n" +
 	"\vTeamService\x12E\n" +
 	"\n" +
 	"CreateTeam\x12!.tournaments.v1.CreateTeamRequest\x1a\x14.tournaments.v1.Team\x12?\n" +
@@ -1452,13 +1271,14 @@ const file_tournaments_v1_team_service_proto_rawDesc = "" +
 	"UpdateTeam\x12!.tournaments.v1.UpdateTeamRequest\x1a\x14.tournaments.v1.Team\x12S\n" +
 	"\n" +
 	"DeleteTeam\x12!.tournaments.v1.DeleteTeamRequest\x1a\".tournaments.v1.DeleteTeamResponse\x12P\n" +
-	"\tListTeams\x12 .tournaments.v1.ListTeamsRequest\x1a!.tournaments.v1.ListTeamsResponse\x12J\n" +
-	"\aBanTeam\x12\x1e.tournaments.v1.BanTeamRequest\x1a\x1f.tournaments.v1.BanTeamResponse\x12P\n" +
-	"\tUnbanTeam\x12 .tournaments.v1.UnbanTeamRequest\x1a!.tournaments.v1.UnbanTeamResponse\x12M\n" +
+	"\tListTeams\x12 .tournaments.v1.ListTeamsRequest\x1a!.tournaments.v1.ListTeamsResponse\x12?\n" +
+	"\aBanTeam\x12\x1e.tournaments.v1.BanTeamRequest\x1a\x14.tournaments.v1.Team\x12C\n" +
+	"\tUnbanTeam\x12 .tournaments.v1.UnbanTeamRequest\x1a\x14.tournaments.v1.Team\x12M\n" +
 	"\bJoinTeam\x12\x1f.tournaments.v1.JoinTeamRequest\x1a .tournaments.v1.JoinTeamResponse\x12P\n" +
 	"\tLeaveTeam\x12 .tournaments.v1.LeaveTeamRequest\x1a!.tournaments.v1.LeaveTeamResponse\x12Y\n" +
-	"\fKickFromTeam\x12#.tournaments.v1.KickFromTeamRequest\x1a$.tournaments.v1.KickFromTeamResponse\x12X\n" +
-	"\vAddLogoTeam\x12#.tournaments.v1.AddImageTeamRequest\x1a$.tournaments.v1.AddImageTeamResponseB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
+	"\fKickFromTeam\x12#.tournaments.v1.KickFromTeamRequest\x1a$.tournaments.v1.KickFromTeamResponse\x12G\n" +
+	"\vAddTeamLogo\x12\".tournaments.v1.AddTeamLogoRequest\x1a\x14.tournaments.v1.Team\x12O\n" +
+	"\x0fDeleteTeamImage\x12&.tournaments.v1.DeleteImageLogoRequest\x1a\x14.tournaments.v1.TeamB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
 
 var (
 	file_tournaments_v1_team_service_proto_rawDescOnce sync.Once
@@ -1472,72 +1292,74 @@ func file_tournaments_v1_team_service_proto_rawDescGZIP() []byte {
 	return file_tournaments_v1_team_service_proto_rawDescData
 }
 
-var file_tournaments_v1_team_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_tournaments_v1_team_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_tournaments_v1_team_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_tournaments_v1_team_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_tournaments_v1_team_service_proto_goTypes = []any{
-	(LeaveTeamResponse_LeaveStatus)(0),   // 0: tournaments.v1.LeaveTeamResponse.LeaveStatus
-	(KickFromTeamResponse_KickStatus)(0), // 1: tournaments.v1.KickFromTeamResponse.KickStatus
-	(*CreateTeamRequest)(nil),            // 2: tournaments.v1.CreateTeamRequest
-	(*GetTeamRequest)(nil),               // 3: tournaments.v1.GetTeamRequest
-	(*TeamWithPlayers)(nil),              // 4: tournaments.v1.TeamWithPlayers
-	(*UpdateTeamRequest)(nil),            // 5: tournaments.v1.UpdateTeamRequest
-	(*DeleteTeamRequest)(nil),            // 6: tournaments.v1.DeleteTeamRequest
-	(*DeleteTeamResponse)(nil),           // 7: tournaments.v1.DeleteTeamResponse
-	(*ListTeamsRequest)(nil),             // 8: tournaments.v1.ListTeamsRequest
-	(*ListTeamsResponse)(nil),            // 9: tournaments.v1.ListTeamsResponse
-	(*BanTeamRequest)(nil),               // 10: tournaments.v1.BanTeamRequest
-	(*BanTeamResponse)(nil),              // 11: tournaments.v1.BanTeamResponse
-	(*UnbanTeamRequest)(nil),             // 12: tournaments.v1.UnbanTeamRequest
-	(*UnbanTeamResponse)(nil),            // 13: tournaments.v1.UnbanTeamResponse
-	(*JoinTeamRequest)(nil),              // 14: tournaments.v1.JoinTeamRequest
-	(*JoinTeamResponse)(nil),             // 15: tournaments.v1.JoinTeamResponse
-	(*LeaveTeamRequest)(nil),             // 16: tournaments.v1.LeaveTeamRequest
-	(*LeaveTeamResponse)(nil),            // 17: tournaments.v1.LeaveTeamResponse
-	(*KickFromTeamRequest)(nil),          // 18: tournaments.v1.KickFromTeamRequest
-	(*KickFromTeamResponse)(nil),         // 19: tournaments.v1.KickFromTeamResponse
-	(*AddImageTeamRequest)(nil),          // 20: tournaments.v1.AddImageTeamRequest
-	(*AddImageTeamResponse)(nil),         // 21: tournaments.v1.AddImageTeamResponse
-	(*ListTeamsResponse_PageInfo)(nil),   // 22: tournaments.v1.ListTeamsResponse.PageInfo
-	(*Team)(nil),                         // 23: tournaments.v1.Team
-	(*Player)(nil),                       // 24: tournaments.v1.Player
+	(TeamMemberChangeStatus)(0),        // 0: tournaments.v1.TeamMemberChangeStatus
+	(*CreateTeamRequest)(nil),          // 1: tournaments.v1.CreateTeamRequest
+	(*GetTeamRequest)(nil),             // 2: tournaments.v1.GetTeamRequest
+	(*UpdateTeamRequest)(nil),          // 3: tournaments.v1.UpdateTeamRequest
+	(*DeleteTeamRequest)(nil),          // 4: tournaments.v1.DeleteTeamRequest
+	(*DeleteTeamResponse)(nil),         // 5: tournaments.v1.DeleteTeamResponse
+	(*ListTeamsRequest)(nil),           // 6: tournaments.v1.ListTeamsRequest
+	(*ListTeamsResponse)(nil),          // 7: tournaments.v1.ListTeamsResponse
+	(*BanTeamRequest)(nil),             // 8: tournaments.v1.BanTeamRequest
+	(*UnbanTeamRequest)(nil),           // 9: tournaments.v1.UnbanTeamRequest
+	(*JoinTeamRequest)(nil),            // 10: tournaments.v1.JoinTeamRequest
+	(*JoinTeamResponse)(nil),           // 11: tournaments.v1.JoinTeamResponse
+	(*LeaveTeamRequest)(nil),           // 12: tournaments.v1.LeaveTeamRequest
+	(*LeaveTeamResponse)(nil),          // 13: tournaments.v1.LeaveTeamResponse
+	(*KickFromTeamRequest)(nil),        // 14: tournaments.v1.KickFromTeamRequest
+	(*KickFromTeamResponse)(nil),       // 15: tournaments.v1.KickFromTeamResponse
+	(*AddTeamLogoRequest)(nil),         // 16: tournaments.v1.AddTeamLogoRequest
+	(*DeleteImageLogoRequest)(nil),     // 17: tournaments.v1.DeleteImageLogoRequest
+	(*ListTeamsResponse_PageInfo)(nil), // 18: tournaments.v1.ListTeamsResponse.PageInfo
+	(*TeamLogo)(nil),                   // 19: tournaments.v1.TeamLogo
+	(*Team)(nil),                       // 20: tournaments.v1.Team
+	(*TeamWithPlayers)(nil),            // 21: tournaments.v1.TeamWithPlayers
 }
 var file_tournaments_v1_team_service_proto_depIdxs = []int32{
-	23, // 0: tournaments.v1.TeamWithPlayers.team:type_name -> tournaments.v1.Team
-	24, // 1: tournaments.v1.TeamWithPlayers.players:type_name -> tournaments.v1.Player
-	23, // 2: tournaments.v1.ListTeamsResponse.teams:type_name -> tournaments.v1.Team
-	22, // 3: tournaments.v1.ListTeamsResponse.page_info:type_name -> tournaments.v1.ListTeamsResponse.PageInfo
-	0,  // 4: tournaments.v1.LeaveTeamResponse.status:type_name -> tournaments.v1.LeaveTeamResponse.LeaveStatus
-	1,  // 5: tournaments.v1.KickFromTeamResponse.status:type_name -> tournaments.v1.KickFromTeamResponse.KickStatus
-	23, // 6: tournaments.v1.AddImageTeamResponse.team:type_name -> tournaments.v1.Team
-	2,  // 7: tournaments.v1.TeamService.CreateTeam:input_type -> tournaments.v1.CreateTeamRequest
-	3,  // 8: tournaments.v1.TeamService.GetTeam:input_type -> tournaments.v1.GetTeamRequest
-	3,  // 9: tournaments.v1.TeamService.GetTeamWithPlayers:input_type -> tournaments.v1.GetTeamRequest
-	5,  // 10: tournaments.v1.TeamService.UpdateTeam:input_type -> tournaments.v1.UpdateTeamRequest
-	6,  // 11: tournaments.v1.TeamService.DeleteTeam:input_type -> tournaments.v1.DeleteTeamRequest
-	8,  // 12: tournaments.v1.TeamService.ListTeams:input_type -> tournaments.v1.ListTeamsRequest
-	10, // 13: tournaments.v1.TeamService.BanTeam:input_type -> tournaments.v1.BanTeamRequest
-	12, // 14: tournaments.v1.TeamService.UnbanTeam:input_type -> tournaments.v1.UnbanTeamRequest
-	14, // 15: tournaments.v1.TeamService.JoinTeam:input_type -> tournaments.v1.JoinTeamRequest
-	16, // 16: tournaments.v1.TeamService.LeaveTeam:input_type -> tournaments.v1.LeaveTeamRequest
-	18, // 17: tournaments.v1.TeamService.KickFromTeam:input_type -> tournaments.v1.KickFromTeamRequest
-	20, // 18: tournaments.v1.TeamService.AddLogoTeam:input_type -> tournaments.v1.AddImageTeamRequest
-	23, // 19: tournaments.v1.TeamService.CreateTeam:output_type -> tournaments.v1.Team
-	23, // 20: tournaments.v1.TeamService.GetTeam:output_type -> tournaments.v1.Team
-	4,  // 21: tournaments.v1.TeamService.GetTeamWithPlayers:output_type -> tournaments.v1.TeamWithPlayers
-	23, // 22: tournaments.v1.TeamService.UpdateTeam:output_type -> tournaments.v1.Team
-	7,  // 23: tournaments.v1.TeamService.DeleteTeam:output_type -> tournaments.v1.DeleteTeamResponse
-	9,  // 24: tournaments.v1.TeamService.ListTeams:output_type -> tournaments.v1.ListTeamsResponse
-	11, // 25: tournaments.v1.TeamService.BanTeam:output_type -> tournaments.v1.BanTeamResponse
-	13, // 26: tournaments.v1.TeamService.UnbanTeam:output_type -> tournaments.v1.UnbanTeamResponse
-	15, // 27: tournaments.v1.TeamService.JoinTeam:output_type -> tournaments.v1.JoinTeamResponse
-	17, // 28: tournaments.v1.TeamService.LeaveTeam:output_type -> tournaments.v1.LeaveTeamResponse
-	19, // 29: tournaments.v1.TeamService.KickFromTeam:output_type -> tournaments.v1.KickFromTeamResponse
-	21, // 30: tournaments.v1.TeamService.AddLogoTeam:output_type -> tournaments.v1.AddImageTeamResponse
-	19, // [19:31] is the sub-list for method output_type
-	7,  // [7:19] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	19, // 0: tournaments.v1.CreateTeamRequest.logo:type_name -> tournaments.v1.TeamLogo
+	19, // 1: tournaments.v1.UpdateTeamRequest.logo:type_name -> tournaments.v1.TeamLogo
+	20, // 2: tournaments.v1.ListTeamsResponse.teams:type_name -> tournaments.v1.Team
+	18, // 3: tournaments.v1.ListTeamsResponse.page_info:type_name -> tournaments.v1.ListTeamsResponse.PageInfo
+	21, // 4: tournaments.v1.JoinTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
+	0,  // 5: tournaments.v1.LeaveTeamResponse.status:type_name -> tournaments.v1.TeamMemberChangeStatus
+	21, // 6: tournaments.v1.LeaveTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
+	0,  // 7: tournaments.v1.KickFromTeamResponse.status:type_name -> tournaments.v1.TeamMemberChangeStatus
+	21, // 8: tournaments.v1.KickFromTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
+	19, // 9: tournaments.v1.AddTeamLogoRequest.logo:type_name -> tournaments.v1.TeamLogo
+	1,  // 10: tournaments.v1.TeamService.CreateTeam:input_type -> tournaments.v1.CreateTeamRequest
+	2,  // 11: tournaments.v1.TeamService.GetTeam:input_type -> tournaments.v1.GetTeamRequest
+	2,  // 12: tournaments.v1.TeamService.GetTeamWithPlayers:input_type -> tournaments.v1.GetTeamRequest
+	3,  // 13: tournaments.v1.TeamService.UpdateTeam:input_type -> tournaments.v1.UpdateTeamRequest
+	4,  // 14: tournaments.v1.TeamService.DeleteTeam:input_type -> tournaments.v1.DeleteTeamRequest
+	6,  // 15: tournaments.v1.TeamService.ListTeams:input_type -> tournaments.v1.ListTeamsRequest
+	8,  // 16: tournaments.v1.TeamService.BanTeam:input_type -> tournaments.v1.BanTeamRequest
+	9,  // 17: tournaments.v1.TeamService.UnbanTeam:input_type -> tournaments.v1.UnbanTeamRequest
+	10, // 18: tournaments.v1.TeamService.JoinTeam:input_type -> tournaments.v1.JoinTeamRequest
+	12, // 19: tournaments.v1.TeamService.LeaveTeam:input_type -> tournaments.v1.LeaveTeamRequest
+	14, // 20: tournaments.v1.TeamService.KickFromTeam:input_type -> tournaments.v1.KickFromTeamRequest
+	16, // 21: tournaments.v1.TeamService.AddTeamLogo:input_type -> tournaments.v1.AddTeamLogoRequest
+	17, // 22: tournaments.v1.TeamService.DeleteTeamImage:input_type -> tournaments.v1.DeleteImageLogoRequest
+	20, // 23: tournaments.v1.TeamService.CreateTeam:output_type -> tournaments.v1.Team
+	20, // 24: tournaments.v1.TeamService.GetTeam:output_type -> tournaments.v1.Team
+	21, // 25: tournaments.v1.TeamService.GetTeamWithPlayers:output_type -> tournaments.v1.TeamWithPlayers
+	20, // 26: tournaments.v1.TeamService.UpdateTeam:output_type -> tournaments.v1.Team
+	5,  // 27: tournaments.v1.TeamService.DeleteTeam:output_type -> tournaments.v1.DeleteTeamResponse
+	7,  // 28: tournaments.v1.TeamService.ListTeams:output_type -> tournaments.v1.ListTeamsResponse
+	20, // 29: tournaments.v1.TeamService.BanTeam:output_type -> tournaments.v1.Team
+	20, // 30: tournaments.v1.TeamService.UnbanTeam:output_type -> tournaments.v1.Team
+	11, // 31: tournaments.v1.TeamService.JoinTeam:output_type -> tournaments.v1.JoinTeamResponse
+	13, // 32: tournaments.v1.TeamService.LeaveTeam:output_type -> tournaments.v1.LeaveTeamResponse
+	15, // 33: tournaments.v1.TeamService.KickFromTeam:output_type -> tournaments.v1.KickFromTeamResponse
+	20, // 34: tournaments.v1.TeamService.AddTeamLogo:output_type -> tournaments.v1.Team
+	20, // 35: tournaments.v1.TeamService.DeleteTeamImage:output_type -> tournaments.v1.Team
+	23, // [23:36] is the sub-list for method output_type
+	10, // [10:23] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_tournaments_v1_team_service_proto_init() }
@@ -1547,16 +1369,18 @@ func file_tournaments_v1_team_service_proto_init() {
 	}
 	file_tournaments_v1_types_proto_init()
 	file_tournaments_v1_team_service_proto_msgTypes[0].OneofWrappers = []any{}
-	file_tournaments_v1_team_service_proto_msgTypes[3].OneofWrappers = []any{}
+	file_tournaments_v1_team_service_proto_msgTypes[2].OneofWrappers = []any{}
+	file_tournaments_v1_team_service_proto_msgTypes[4].OneofWrappers = []any{}
 	file_tournaments_v1_team_service_proto_msgTypes[5].OneofWrappers = []any{}
-	file_tournaments_v1_team_service_proto_msgTypes[6].OneofWrappers = []any{}
+	file_tournaments_v1_team_service_proto_msgTypes[12].OneofWrappers = []any{}
+	file_tournaments_v1_team_service_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tournaments_v1_team_service_proto_rawDesc), len(file_tournaments_v1_team_service_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   21,
+			NumEnums:      1,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

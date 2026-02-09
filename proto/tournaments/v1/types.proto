@@ -29,3 +29,13 @@ message Player {
   string login = 2;
   string avatar_url = 3;
 }
+
+message TeamWithPlayers {
+  Team team = 1;
+  repeated Player players = 2;
+}
+
+message TeamLogo {
+  bytes image_data = 1;     // Бинарные данные
+  string filename = 2;      // "team-logo.jpg"
+}

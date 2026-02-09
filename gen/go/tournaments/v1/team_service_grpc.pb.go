@@ -30,7 +30,8 @@ const (
 	TeamService_JoinTeam_FullMethodName           = "/tournaments.v1.TeamService/JoinTeam"
 	TeamService_LeaveTeam_FullMethodName          = "/tournaments.v1.TeamService/LeaveTeam"
 	TeamService_KickFromTeam_FullMethodName       = "/tournaments.v1.TeamService/KickFromTeam"
-	TeamService_AddLogoTeam_FullMethodName        = "/tournaments.v1.TeamService/AddLogoTeam"
+	TeamService_AddTeamLogo_FullMethodName        = "/tournaments.v1.TeamService/AddTeamLogo"
+	TeamService_DeleteTeamImage_FullMethodName    = "/tournaments.v1.TeamService/DeleteTeamImage"
 )
 
 // TeamServiceClient is the client API for TeamService service.
@@ -45,14 +46,15 @@ type TeamServiceClient interface {
 	DeleteTeam(ctx context.Context, in *DeleteTeamRequest, opts ...grpc.CallOption) (*DeleteTeamResponse, error)
 	ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (*ListTeamsResponse, error)
 	// Admin and Moderator
-	BanTeam(ctx context.Context, in *BanTeamRequest, opts ...grpc.CallOption) (*BanTeamResponse, error)
-	UnbanTeam(ctx context.Context, in *UnbanTeamRequest, opts ...grpc.CallOption) (*UnbanTeamResponse, error)
+	BanTeam(ctx context.Context, in *BanTeamRequest, opts ...grpc.CallOption) (*Team, error)
+	UnbanTeam(ctx context.Context, in *UnbanTeamRequest, opts ...grpc.CallOption) (*Team, error)
 	// Actions with the team
 	JoinTeam(ctx context.Context, in *JoinTeamRequest, opts ...grpc.CallOption) (*JoinTeamResponse, error)
 	LeaveTeam(ctx context.Context, in *LeaveTeamRequest, opts ...grpc.CallOption) (*LeaveTeamResponse, error)
 	KickFromTeam(ctx context.Context, in *KickFromTeamRequest, opts ...grpc.CallOption) (*KickFromTeamResponse, error)
 	// Img
-	AddLogoTeam(ctx context.Context, in *AddImageTeamRequest, opts ...grpc.CallOption) (*AddImageTeamResponse, error)
+	AddTeamLogo(ctx context.Context, in *AddTeamLogoRequest, opts ...grpc.CallOption) (*Team, error)
+	DeleteTeamImage(ctx context.Context, in *DeleteImageLogoRequest, opts ...grpc.CallOption) (*Team, error)
 }
 
 type teamServiceClient struct {
@@ -123,9 +125,9 @@ func (c *teamServiceClient) ListTeams(ctx context.Context, in *ListTeamsRequest,
 	return out, nil
 }
 
-func (c *teamServiceClient) BanTeam(ctx context.Context, in *BanTeamRequest, opts ...grpc.CallOption) (*BanTeamResponse, error) {
+func (c *teamServiceClient) BanTeam(ctx context.Context, in *BanTeamRequest, opts ...grpc.CallOption) (*Team, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BanTeamResponse)
+	out := new(Team)
 	err := c.cc.Invoke(ctx, TeamService_BanTeam_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -133,9 +135,9 @@ func (c *teamServiceClient) BanTeam(ctx context.Context, in *BanTeamRequest, opt
 	return out, nil
 }
 
-func (c *teamServiceClient) UnbanTeam(ctx context.Context, in *UnbanTeamRequest, opts ...grpc.CallOption) (*UnbanTeamResponse, error) {
+func (c *teamServiceClient) UnbanTeam(ctx context.Context, in *UnbanTeamRequest, opts ...grpc.CallOption) (*Team, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UnbanTeamResponse)
+	out := new(Team)
 	err := c.cc.Invoke(ctx, TeamService_UnbanTeam_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -173,10 +175,20 @@ func (c *teamServiceClient) KickFromTeam(ctx context.Context, in *KickFromTeamRe
 	return out, nil
 }
 
-func (c *teamServiceClient) AddLogoTeam(ctx context.Context, in *AddImageTeamRequest, opts ...grpc.CallOption) (*AddImageTeamResponse, error) {
+func (c *teamServiceClient) AddTeamLogo(ctx context.Context, in *AddTeamLogoRequest, opts ...grpc.CallOption) (*Team, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddImageTeamResponse)
-	err := c.cc.Invoke(ctx, TeamService_AddLogoTeam_FullMethodName, in, out, cOpts...)
+	out := new(Team)
+	err := c.cc.Invoke(ctx, TeamService_AddTeamLogo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) DeleteTeamImage(ctx context.Context, in *DeleteImageLogoRequest, opts ...grpc.CallOption) (*Team, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Team)
+	err := c.cc.Invoke(ctx, TeamService_DeleteTeamImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -195,14 +207,15 @@ type TeamServiceServer interface {
 	DeleteTeam(context.Context, *DeleteTeamRequest) (*DeleteTeamResponse, error)
 	ListTeams(context.Context, *ListTeamsRequest) (*ListTeamsResponse, error)
 	// Admin and Moderator
-	BanTeam(context.Context, *BanTeamRequest) (*BanTeamResponse, error)
-	UnbanTeam(context.Context, *UnbanTeamRequest) (*UnbanTeamResponse, error)
+	BanTeam(context.Context, *BanTeamRequest) (*Team, error)
+	UnbanTeam(context.Context, *UnbanTeamRequest) (*Team, error)
 	// Actions with the team
 	JoinTeam(context.Context, *JoinTeamRequest) (*JoinTeamResponse, error)
 	LeaveTeam(context.Context, *LeaveTeamRequest) (*LeaveTeamResponse, error)
 	KickFromTeam(context.Context, *KickFromTeamRequest) (*KickFromTeamResponse, error)
 	// Img
-	AddLogoTeam(context.Context, *AddImageTeamRequest) (*AddImageTeamResponse, error)
+	AddTeamLogo(context.Context, *AddTeamLogoRequest) (*Team, error)
+	DeleteTeamImage(context.Context, *DeleteImageLogoRequest) (*Team, error)
 	mustEmbedUnimplementedTeamServiceServer()
 }
 
@@ -231,10 +244,10 @@ func (UnimplementedTeamServiceServer) DeleteTeam(context.Context, *DeleteTeamReq
 func (UnimplementedTeamServiceServer) ListTeams(context.Context, *ListTeamsRequest) (*ListTeamsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListTeams not implemented")
 }
-func (UnimplementedTeamServiceServer) BanTeam(context.Context, *BanTeamRequest) (*BanTeamResponse, error) {
+func (UnimplementedTeamServiceServer) BanTeam(context.Context, *BanTeamRequest) (*Team, error) {
 	return nil, status.Error(codes.Unimplemented, "method BanTeam not implemented")
 }
-func (UnimplementedTeamServiceServer) UnbanTeam(context.Context, *UnbanTeamRequest) (*UnbanTeamResponse, error) {
+func (UnimplementedTeamServiceServer) UnbanTeam(context.Context, *UnbanTeamRequest) (*Team, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnbanTeam not implemented")
 }
 func (UnimplementedTeamServiceServer) JoinTeam(context.Context, *JoinTeamRequest) (*JoinTeamResponse, error) {
@@ -246,8 +259,11 @@ func (UnimplementedTeamServiceServer) LeaveTeam(context.Context, *LeaveTeamReque
 func (UnimplementedTeamServiceServer) KickFromTeam(context.Context, *KickFromTeamRequest) (*KickFromTeamResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method KickFromTeam not implemented")
 }
-func (UnimplementedTeamServiceServer) AddLogoTeam(context.Context, *AddImageTeamRequest) (*AddImageTeamResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddLogoTeam not implemented")
+func (UnimplementedTeamServiceServer) AddTeamLogo(context.Context, *AddTeamLogoRequest) (*Team, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddTeamLogo not implemented")
+}
+func (UnimplementedTeamServiceServer) DeleteTeamImage(context.Context, *DeleteImageLogoRequest) (*Team, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteTeamImage not implemented")
 }
 func (UnimplementedTeamServiceServer) mustEmbedUnimplementedTeamServiceServer() {}
 func (UnimplementedTeamServiceServer) testEmbeddedByValue()                     {}
@@ -468,20 +484,38 @@ func _TeamService_KickFromTeam_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TeamService_AddLogoTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddImageTeamRequest)
+func _TeamService_AddTeamLogo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTeamLogoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TeamServiceServer).AddLogoTeam(ctx, in)
+		return srv.(TeamServiceServer).AddTeamLogo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TeamService_AddLogoTeam_FullMethodName,
+		FullMethod: TeamService_AddTeamLogo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).AddLogoTeam(ctx, req.(*AddImageTeamRequest))
+		return srv.(TeamServiceServer).AddTeamLogo(ctx, req.(*AddTeamLogoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_DeleteTeamImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteImageLogoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).DeleteTeamImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TeamService_DeleteTeamImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).DeleteTeamImage(ctx, req.(*DeleteImageLogoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -538,8 +572,12 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TeamService_KickFromTeam_Handler,
 		},
 		{
-			MethodName: "AddLogoTeam",
-			Handler:    _TeamService_AddLogoTeam_Handler,
+			MethodName: "AddTeamLogo",
+			Handler:    _TeamService_AddTeamLogo_Handler,
+		},
+		{
+			MethodName: "DeleteTeamImage",
+			Handler:    _TeamService_DeleteTeamImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

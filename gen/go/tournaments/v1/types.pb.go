@@ -250,6 +250,110 @@ func (x *Player) GetAvatarUrl() string {
 	return ""
 }
 
+type TeamWithPlayers struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Team          *Team                  `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
+	Players       []*Player              `protobuf:"bytes,2,rep,name=players,proto3" json:"players,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamWithPlayers) Reset() {
+	*x = TeamWithPlayers{}
+	mi := &file_tournaments_v1_types_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamWithPlayers) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamWithPlayers) ProtoMessage() {}
+
+func (x *TeamWithPlayers) ProtoReflect() protoreflect.Message {
+	mi := &file_tournaments_v1_types_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamWithPlayers.ProtoReflect.Descriptor instead.
+func (*TeamWithPlayers) Descriptor() ([]byte, []int) {
+	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TeamWithPlayers) GetTeam() *Team {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
+func (x *TeamWithPlayers) GetPlayers() []*Player {
+	if x != nil {
+		return x.Players
+	}
+	return nil
+}
+
+type TeamLogo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ImageData     []byte                 `protobuf:"bytes,1,opt,name=image_data,json=imageData,proto3" json:"image_data,omitempty"` // Бинарные данные
+	Filename      string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`                    // "team-logo.jpg"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamLogo) Reset() {
+	*x = TeamLogo{}
+	mi := &file_tournaments_v1_types_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamLogo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamLogo) ProtoMessage() {}
+
+func (x *TeamLogo) ProtoReflect() protoreflect.Message {
+	mi := &file_tournaments_v1_types_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamLogo.ProtoReflect.Descriptor instead.
+func (*TeamLogo) Descriptor() ([]byte, []int) {
+	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TeamLogo) GetImageData() []byte {
+	if x != nil {
+		return x.ImageData
+	}
+	return nil
+}
+
+func (x *TeamLogo) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
 var File_tournaments_v1_types_proto protoreflect.FileDescriptor
 
 const file_tournaments_v1_types_proto_rawDesc = "" +
@@ -276,7 +380,14 @@ const file_tournaments_v1_types_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05login\x18\x02 \x01(\tR\x05login\x12\x1d\n" +
 	"\n" +
-	"avatar_url\x18\x03 \x01(\tR\tavatarUrlB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
+	"avatar_url\x18\x03 \x01(\tR\tavatarUrl\"m\n" +
+	"\x0fTeamWithPlayers\x12(\n" +
+	"\x04team\x18\x01 \x01(\v2\x14.tournaments.v1.TeamR\x04team\x120\n" +
+	"\aplayers\x18\x02 \x03(\v2\x16.tournaments.v1.PlayerR\aplayers\"E\n" +
+	"\bTeamLogo\x12\x1d\n" +
+	"\n" +
+	"image_data\x18\x01 \x01(\fR\timageData\x12\x1a\n" +
+	"\bfilename\x18\x02 \x01(\tR\bfilenameB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
 
 var (
 	file_tournaments_v1_types_proto_rawDescOnce sync.Once
@@ -290,21 +401,25 @@ func file_tournaments_v1_types_proto_rawDescGZIP() []byte {
 	return file_tournaments_v1_types_proto_rawDescData
 }
 
-var file_tournaments_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_tournaments_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_tournaments_v1_types_proto_goTypes = []any{
 	(*Team)(nil),                  // 0: tournaments.v1.Team
 	(*BanInfo)(nil),               // 1: tournaments.v1.BanInfo
 	(*Player)(nil),                // 2: tournaments.v1.Player
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*TeamWithPlayers)(nil),       // 3: tournaments.v1.TeamWithPlayers
+	(*TeamLogo)(nil),              // 4: tournaments.v1.TeamLogo
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_tournaments_v1_types_proto_depIdxs = []int32{
 	1, // 0: tournaments.v1.Team.ban_info:type_name -> tournaments.v1.BanInfo
-	3, // 1: tournaments.v1.BanInfo.banned_at:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 1: tournaments.v1.BanInfo.banned_at:type_name -> google.protobuf.Timestamp
+	0, // 2: tournaments.v1.TeamWithPlayers.team:type_name -> tournaments.v1.Team
+	2, // 3: tournaments.v1.TeamWithPlayers.players:type_name -> tournaments.v1.Player
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_tournaments_v1_types_proto_init() }
@@ -319,7 +434,7 @@ func file_tournaments_v1_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tournaments_v1_types_proto_rawDesc), len(file_tournaments_v1_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

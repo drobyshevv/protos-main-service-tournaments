@@ -17,8 +17,8 @@ service TeamService {
   rpc ListTeams(ListTeamsRequest) returns (ListTeamsResponse);
 
   //Admin and Moderator
-  rpc BanTeam(BanTeamRequest) returns (BanTeamResponse);
-  rpc UnbanTeam(UnbanTeamRequest) returns (UnbanTeamResponse);
+  rpc BanTeam(BanTeamRequest) returns (Team);
+  rpc UnbanTeam(UnbanTeamRequest) returns (Team);
 
   //Actions with the team
   rpc JoinTeam(JoinTeamRequest) returns (JoinTeamResponse);
@@ -26,7 +26,8 @@ service TeamService {
   rpc KickFromTeam(KickFromTeamRequest) returns (KickFromTeamResponse);
   
   //Img
-  rpc UploadTeamLogo(UploadTeamLogoRequest) returns (Team);
+  rpc AddTeamLogo(AddTeamLogoRequest) returns (Team);
+  rpc DeleteTeamImage(DeleteImageLogoRequest) returns (Team);
 }
 
 
@@ -39,15 +40,12 @@ message CreateTeamRequest {
   int32 size = 2; 
   optional string description = 3;
   int64 games_id = 4;
+  int64 captain_id = 5;
+  optional TeamLogo logo = 6;     //Опционально при создании добавить logo
 }
 
 message GetTeamRequest {
   int64 id = 1;
-}
-
-message TeamWithPlayers {
-  Team team = 1;
-  repeated Player players = 2;
 }
 
 message UpdateTeamRequest {
@@ -56,6 +54,7 @@ message UpdateTeamRequest {
   optional int32 size = 3;
   optional string description = 4;
   optional int64 captain_id = 5;      //Проверка на нового капитана в составе команды
+  optional TeamLogo logo = 6; 
 }
 
 message DeleteTeamRequest {
@@ -106,23 +105,25 @@ message BanTeamRequest {
   string reason = 2;      //Причина бана text
 }
 
-message BanTeamResponse {
-  int64 id = 1;     //ban id
-}
-
 message UnbanTeamRequest {
   int64 id = 1;     //teams id
 }
 
-message UnbanTeamResponse {
-  bool success = 1;
-}
 
 
 
 ////////////////////////
 //Actions with the team/
 ////////////////////////
+
+enum TeamMemberChangeStatus {
+  TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED = 0;
+  TEAM_MEMBER_CHANGE_STATUS_SUCCESS = 1;                // Успешно
+  TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER = 2;            // Последний участник → команда удалена
+  TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN = 3;      // Нужно выбрать нового капитана
+  TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT = 4;     // Команда участвует в турнире
+}
+
 
 message JoinTeamRequest {
   int64 user_id = 1;
@@ -132,6 +133,7 @@ message JoinTeamRequest {
 //Проверяем поля: size & таблица ban
 message JoinTeamResponse {
   int64 users_teams_id = 1;
+  TeamWithPlayers team = 2;
 }
 
 message LeaveTeamRequest {
@@ -146,18 +148,9 @@ message LeaveTeamRequest {
 message LeaveTeamResponse {
   bool success = 1;
   string message = 2;
-
-  enum LeaveStatus {
-    LEAVE_STATUS_UNSPECIFIED = 0;
-    LEAVE_STATUS_SUCCESS = 1;      // Успешно вышел
-    LEAVE_STATUS_LAST_MEMBER = 2;       // Последний участник → команда удалена
-    LEAVE_STATUS_NEEDS_NEW_CAPTAIN = 3;      // Нужно выбрать нового капитана
-    LEAVE_STATUS_TEAM_IN_TOURNAMENT = 4;      // Команда учавствует в турнире
-  }
-  LeaveStatus status = 3;
+  TeamMemberChangeStatus status = 3;
+  optional TeamWithPlayers team = 4;
 }
-
-
 
 // if admin delete user from team && user is_captain -> message = "необходимо назначить капитана"
 // if team in tournament -> message = "команда учавствует в турнире"
@@ -169,16 +162,10 @@ message KickFromTeamRequest {
 message KickFromTeamResponse {
   bool success = 1;
   string message = 2;
-
-  enum KickStatus {
-    KICK_STATUS_UNSPECIFIED = 0;
-    KICK_STATUS_SUCCESS = 1;      // Успешно вышел
-    KICK_STATUS_LAST_MEMBER = 2;       // Последний участник → команда удалена
-    KICK_STATUS_NEEDS_NEW_CAPTAIN = 3;      // Нужно выбрать нового капитана
-    KICK_STATUS_TEAM_IN_TOURNAMENT = 4;      // Команда учавствует в турнире
-  }
-  KickStatus status = 3;
+  TeamMemberChangeStatus status = 3;
+  optional TeamWithPlayers team = 4;
 }
+
 
 
 
@@ -186,8 +173,13 @@ message KickFromTeamResponse {
 //Img//
 ///////
 
-message AddImageTeamRequest {
+message AddTeamLogoRequest {
   int64 team_id = 1;      // ID команды
-  bytes image_data = 2;     // Бинарные данные (if len(image_data == 0) -> err || if len(image_data) == 5*1024*1024 -> err)
-  string filename = 3;      // "team-logo.jpg"
+  TeamLogo logo = 2;
 }
+
+//Вставляем стандартную картинку
+message DeleteImageLogoRequest {
+  int64 team_id = 1;
+}
+
