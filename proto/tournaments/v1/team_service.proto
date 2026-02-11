@@ -219,11 +219,9 @@ message JoinTeamRequest {
   int64 team_id = 2;
 }
 
-//TODO: status
-//Проверяем поля: size & таблица ban
 message JoinTeamResponse {
   int64 users_teams_id = 1;
-  TeamWithPlayers team = 2;
+  string status = 2;
 }
 
 message LeaveTeamRequest {

@@ -687,12 +687,10 @@ func (x *JoinTeamRequest) GetTeamId() int64 {
 	return 0
 }
 
-// TODO: status
-// Проверяем поля: size & таблица ban
 type JoinTeamResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UsersTeamsId  int64                  `protobuf:"varint,1,opt,name=users_teams_id,json=usersTeamsId,proto3" json:"users_teams_id,omitempty"`
-	Team          *TeamWithPlayers       `protobuf:"bytes,2,opt,name=team,proto3" json:"team,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -734,11 +732,11 @@ func (x *JoinTeamResponse) GetUsersTeamsId() int64 {
 	return 0
 }
 
-func (x *JoinTeamResponse) GetTeam() *TeamWithPlayers {
+func (x *JoinTeamResponse) GetStatus() string {
 	if x != nil {
-		return x.Team
+		return x.Status
 	}
-	return nil
+	return ""
 }
 
 type LeaveTeamRequest struct {
@@ -1231,10 +1229,10 @@ const file_tournaments_v1_team_service_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"C\n" +
 	"\x0fJoinTeamRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"m\n" +
+	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"P\n" +
 	"\x10JoinTeamResponse\x12$\n" +
-	"\x0eusers_teams_id\x18\x01 \x01(\x03R\fusersTeamsId\x123\n" +
-	"\x04team\x18\x02 \x01(\v2\x1f.tournaments.v1.TeamWithPlayersR\x04team\"D\n" +
+	"\x0eusers_teams_id\x18\x01 \x01(\x03R\fusersTeamsId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\"D\n" +
 	"\x10LeaveTeamRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x03R\x06teamId\"\xca\x01\n" +
@@ -1325,43 +1323,42 @@ var file_tournaments_v1_team_service_proto_depIdxs = []int32{
 	19, // 1: tournaments.v1.UpdateTeamRequest.logo:type_name -> tournaments.v1.TeamLogo
 	20, // 2: tournaments.v1.ListTeamsResponse.teams:type_name -> tournaments.v1.Team
 	18, // 3: tournaments.v1.ListTeamsResponse.page_info:type_name -> tournaments.v1.ListTeamsResponse.PageInfo
-	21, // 4: tournaments.v1.JoinTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
-	0,  // 5: tournaments.v1.LeaveTeamResponse.status:type_name -> tournaments.v1.TeamMemberChangeStatus
-	21, // 6: tournaments.v1.LeaveTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
-	0,  // 7: tournaments.v1.KickFromTeamResponse.status:type_name -> tournaments.v1.TeamMemberChangeStatus
-	21, // 8: tournaments.v1.KickFromTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
-	19, // 9: tournaments.v1.AddTeamLogoRequest.logo:type_name -> tournaments.v1.TeamLogo
-	1,  // 10: tournaments.v1.TeamService.CreateTeam:input_type -> tournaments.v1.CreateTeamRequest
-	2,  // 11: tournaments.v1.TeamService.GetTeam:input_type -> tournaments.v1.GetTeamRequest
-	2,  // 12: tournaments.v1.TeamService.GetTeamWithPlayers:input_type -> tournaments.v1.GetTeamRequest
-	3,  // 13: tournaments.v1.TeamService.UpdateTeam:input_type -> tournaments.v1.UpdateTeamRequest
-	4,  // 14: tournaments.v1.TeamService.DeleteTeam:input_type -> tournaments.v1.DeleteTeamRequest
-	6,  // 15: tournaments.v1.TeamService.ListTeams:input_type -> tournaments.v1.ListTeamsRequest
-	8,  // 16: tournaments.v1.TeamService.BanTeam:input_type -> tournaments.v1.BanTeamRequest
-	9,  // 17: tournaments.v1.TeamService.UnbanTeam:input_type -> tournaments.v1.UnbanTeamRequest
-	10, // 18: tournaments.v1.TeamService.JoinTeam:input_type -> tournaments.v1.JoinTeamRequest
-	12, // 19: tournaments.v1.TeamService.LeaveTeam:input_type -> tournaments.v1.LeaveTeamRequest
-	14, // 20: tournaments.v1.TeamService.KickFromTeam:input_type -> tournaments.v1.KickFromTeamRequest
-	16, // 21: tournaments.v1.TeamService.AddTeamLogo:input_type -> tournaments.v1.AddTeamLogoRequest
-	17, // 22: tournaments.v1.TeamService.DeleteTeamImage:input_type -> tournaments.v1.DeleteImageLogoRequest
-	20, // 23: tournaments.v1.TeamService.CreateTeam:output_type -> tournaments.v1.Team
-	20, // 24: tournaments.v1.TeamService.GetTeam:output_type -> tournaments.v1.Team
-	21, // 25: tournaments.v1.TeamService.GetTeamWithPlayers:output_type -> tournaments.v1.TeamWithPlayers
-	20, // 26: tournaments.v1.TeamService.UpdateTeam:output_type -> tournaments.v1.Team
-	5,  // 27: tournaments.v1.TeamService.DeleteTeam:output_type -> tournaments.v1.DeleteTeamResponse
-	7,  // 28: tournaments.v1.TeamService.ListTeams:output_type -> tournaments.v1.ListTeamsResponse
-	20, // 29: tournaments.v1.TeamService.BanTeam:output_type -> tournaments.v1.Team
-	20, // 30: tournaments.v1.TeamService.UnbanTeam:output_type -> tournaments.v1.Team
-	11, // 31: tournaments.v1.TeamService.JoinTeam:output_type -> tournaments.v1.JoinTeamResponse
-	13, // 32: tournaments.v1.TeamService.LeaveTeam:output_type -> tournaments.v1.LeaveTeamResponse
-	15, // 33: tournaments.v1.TeamService.KickFromTeam:output_type -> tournaments.v1.KickFromTeamResponse
-	20, // 34: tournaments.v1.TeamService.AddTeamLogo:output_type -> tournaments.v1.Team
-	20, // 35: tournaments.v1.TeamService.DeleteTeamImage:output_type -> tournaments.v1.Team
-	23, // [23:36] is the sub-list for method output_type
-	10, // [10:23] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	0,  // 4: tournaments.v1.LeaveTeamResponse.status:type_name -> tournaments.v1.TeamMemberChangeStatus
+	21, // 5: tournaments.v1.LeaveTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
+	0,  // 6: tournaments.v1.KickFromTeamResponse.status:type_name -> tournaments.v1.TeamMemberChangeStatus
+	21, // 7: tournaments.v1.KickFromTeamResponse.team:type_name -> tournaments.v1.TeamWithPlayers
+	19, // 8: tournaments.v1.AddTeamLogoRequest.logo:type_name -> tournaments.v1.TeamLogo
+	1,  // 9: tournaments.v1.TeamService.CreateTeam:input_type -> tournaments.v1.CreateTeamRequest
+	2,  // 10: tournaments.v1.TeamService.GetTeam:input_type -> tournaments.v1.GetTeamRequest
+	2,  // 11: tournaments.v1.TeamService.GetTeamWithPlayers:input_type -> tournaments.v1.GetTeamRequest
+	3,  // 12: tournaments.v1.TeamService.UpdateTeam:input_type -> tournaments.v1.UpdateTeamRequest
+	4,  // 13: tournaments.v1.TeamService.DeleteTeam:input_type -> tournaments.v1.DeleteTeamRequest
+	6,  // 14: tournaments.v1.TeamService.ListTeams:input_type -> tournaments.v1.ListTeamsRequest
+	8,  // 15: tournaments.v1.TeamService.BanTeam:input_type -> tournaments.v1.BanTeamRequest
+	9,  // 16: tournaments.v1.TeamService.UnbanTeam:input_type -> tournaments.v1.UnbanTeamRequest
+	10, // 17: tournaments.v1.TeamService.JoinTeam:input_type -> tournaments.v1.JoinTeamRequest
+	12, // 18: tournaments.v1.TeamService.LeaveTeam:input_type -> tournaments.v1.LeaveTeamRequest
+	14, // 19: tournaments.v1.TeamService.KickFromTeam:input_type -> tournaments.v1.KickFromTeamRequest
+	16, // 20: tournaments.v1.TeamService.AddTeamLogo:input_type -> tournaments.v1.AddTeamLogoRequest
+	17, // 21: tournaments.v1.TeamService.DeleteTeamImage:input_type -> tournaments.v1.DeleteImageLogoRequest
+	20, // 22: tournaments.v1.TeamService.CreateTeam:output_type -> tournaments.v1.Team
+	20, // 23: tournaments.v1.TeamService.GetTeam:output_type -> tournaments.v1.Team
+	21, // 24: tournaments.v1.TeamService.GetTeamWithPlayers:output_type -> tournaments.v1.TeamWithPlayers
+	20, // 25: tournaments.v1.TeamService.UpdateTeam:output_type -> tournaments.v1.Team
+	5,  // 26: tournaments.v1.TeamService.DeleteTeam:output_type -> tournaments.v1.DeleteTeamResponse
+	7,  // 27: tournaments.v1.TeamService.ListTeams:output_type -> tournaments.v1.ListTeamsResponse
+	20, // 28: tournaments.v1.TeamService.BanTeam:output_type -> tournaments.v1.Team
+	20, // 29: tournaments.v1.TeamService.UnbanTeam:output_type -> tournaments.v1.Team
+	11, // 30: tournaments.v1.TeamService.JoinTeam:output_type -> tournaments.v1.JoinTeamResponse
+	13, // 31: tournaments.v1.TeamService.LeaveTeam:output_type -> tournaments.v1.LeaveTeamResponse
+	15, // 32: tournaments.v1.TeamService.KickFromTeam:output_type -> tournaments.v1.KickFromTeamResponse
+	20, // 33: tournaments.v1.TeamService.AddTeamLogo:output_type -> tournaments.v1.Team
+	20, // 34: tournaments.v1.TeamService.DeleteTeamImage:output_type -> tournaments.v1.Team
+	22, // [22:35] is the sub-list for method output_type
+	9,  // [9:22] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_tournaments_v1_team_service_proto_init() }
