@@ -4,30 +4,119 @@ package tournaments.v1;
 
 option go_package = "github.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1";
 
+import "google/api/annotations.proto";
 import "tournaments/v1/types.proto";
 
 service TeamService {
-  
-  //CRUD
-  rpc CreateTeam(CreateTeamRequest) returns (Team);
-  rpc GetTeam(GetTeamRequest) returns (Team);
-  rpc GetTeamWithPlayers(GetTeamRequest) returns (TeamWithPlayers);
-  rpc UpdateTeam(UpdateTeamRequest) returns (Team);
-  rpc DeleteTeam(DeleteTeamRequest) returns (DeleteTeamResponse);
-  rpc ListTeams(ListTeamsRequest) returns (ListTeamsResponse);
 
-  //Admin and Moderator
-  rpc BanTeam(BanTeamRequest) returns (Team);
-  rpc UnbanTeam(UnbanTeamRequest) returns (Team);
+  // CreateTeam создает новую команду с указанными параметрами.
+  // При создании можно опционально загрузить логотип команды.
+  rpc CreateTeam(CreateTeamRequest) returns (Team) {
+    option (google.api.http) = {
+      post: "/v1/teams"
+      body: "*"
+    };
+  }
 
-  //Actions with the team
-  rpc JoinTeam(JoinTeamRequest) returns (JoinTeamResponse);
-  rpc LeaveTeam(LeaveTeamRequest) returns (LeaveTeamResponse);
-  rpc KickFromTeam(KickFromTeamRequest) returns (KickFromTeamResponse);
+  // GetTeam возвращает команду по её уникальному идентификатору.
+  rpc GetTeam(GetTeamRequest) returns (Team) {
+    option (google.api.http) = {
+      get: "/v1/teams/{id}"
+    };
+  }
+
+  // GetTeamWithPlayers возвращает команду вместе со списком её игроков.
+  rpc GetTeamWithPlayers(GetTeamRequest) returns (TeamWithPlayers) {
+    option (google.api.http) = {
+      get: "/v1/teams/{id}/players"
+    };
+  }
+
+  // UpdateTeam обновляет данные команды (название, размер, описание, капитана, логотип).
+  // Обновляются только переданные поля.
+  rpc UpdateTeam(UpdateTeamRequest) returns (Team) {
+    option (google.api.http) = {
+      patch: "/v1/teams/{id}"
+      body: "*"
+    };
+  }
+
+  // DeleteTeam удаляет команду по ID.
+  // Удаление запрещено, если команда участвует в активном турнире.
+  // В ответе возвращается количество удалённых участников команды.
+  rpc DeleteTeam(DeleteTeamRequest) returns (DeleteTeamResponse) {
+    option (google.api.http) = {
+      delete: "/v1/teams/{id}"
+    };
+  }
+
+  // ListTeams возвращает список команд с пагинацией и фильтрами.
+  // Поддерживается фильтрация по названию, игре, диапазону очков и статусу бана.
+  // GET /v1/teams?page=1&pageSize=20&title=NAVI&gamesId=1&pointsMin=100&pointsMax=500&isBaned=false
+  rpc ListTeams(ListTeamsRequest) returns (ListTeamsResponse) {
+    option (google.api.http) = {
+      get: "/v1/teams"
+    };
+  }
+
+  // BanTeam блокирует команду и сохраняет причину блокировки.
+  // Заблокированная команда не может участвовать в турнирах и принимать новых игроков.
+  rpc BanTeam(BanTeamRequest) returns (Team) {
+    option (google.api.http) = {
+      post: "/v1/teams/{id}/ban"
+      body: "*"
+    };
+  }
+
+  // UnbanTeam снимает блокировку с команды.
+  rpc UnbanTeam(UnbanTeamRequest) returns (Team) {
+    option (google.api.http) = {
+      post: "/v1/teams/{id}/unban"
+      body: "*"
+    };
+  }
+
+  // JoinTeam добавляет пользователя в команду, если есть свободные места
+  // и команда не находится в бане.
+  rpc JoinTeam(JoinTeamRequest) returns (JoinTeamResponse) {
+    option (google.api.http) = {
+      post: "/v1/teams/{team_id}/join"
+      body: "*"
+    };
+  }
+
+  // LeaveTeam удаляет пользователя из команды.
+  // Если пользователь является капитаном, может потребоваться назначение нового капитана.
+  rpc LeaveTeam(LeaveTeamRequest) returns (LeaveTeamResponse) {
+    option (google.api.http) = {
+      post: "/v1/teams/{team_id}/leave"
+      body: "*"
+    };
+  }
+
+  // KickFromTeam удаляет указанного пользователя из команды (капитаном, модератором или админом).
+  // Операция может быть запрещена, если команда участвует в турнире.
+  rpc KickFromTeam(KickFromTeamRequest) returns (KickFromTeamResponse) {
+    option (google.api.http) = {
+      post: "/v1/teams/{team_id}/kick"
+      body: "*"
+    };
+  }
   
-  //Img
-  rpc AddTeamLogo(AddTeamLogoRequest) returns (Team);
-  rpc DeleteTeamImage(DeleteImageLogoRequest) returns (Team);
+  // AddTeamLogo загружает или обновляет логотип команды.
+  rpc AddTeamLogo(AddTeamLogoRequest) returns (Team) {
+    option (google.api.http) = {
+      post: "/v1/teams/{team_id}/logo"
+      body: "logo"
+    };
+  }
+
+  // DeleteTeamImage удаляет логотип команды и устанавливает стандартное изображение.
+  rpc DeleteTeamImage(DeleteImageLogoRequest) returns (Team) {
+    option (google.api.http) = {
+      delete: "/v1/teams/{team_id}/logo"
+    };
+  }
 }
 
 
@@ -70,8 +159,8 @@ message DeleteTeamResponse {
 }
 
 message ListTeamsRequest {
-  int32 page = 1;     // Номер страницы (начинается с 1)
-  int32 page_size = 2;      // Размер страницы (10, 25, 50, 100)
+  int32 page = 1; // Номер страницы (начинается с 1)
+  int32 page_size = 2; // Размер страницы (10, 25, 50, 100)
   optional string title = 3;    //По названию
   optional int64 games_id = 4;    //По командам
   optional int32 points_min = 5;     //Минимальные очки
@@ -84,11 +173,11 @@ message ListTeamsResponse {
   
   //Metadata for pages
   message PageInfo {
-    int32 page = 1;     //Текущая страница
-    int32 size = 2;     //Размер страницы
-    int64 total_teams = 3;      //Количество команд
-    int64 total_pages = 4;      //Количество страниц
-    bool has_next = 5;      //Есть ли следующая?
+    int32 page = 1; //Текущая страница
+    int32 size = 2; //Размер страницы
+    int64 total_teams = 3; //Количество команд
+    int64 total_pages = 4; //Количество страниц
+    bool has_next = 5; //Есть ли следующая?
   }
   PageInfo page_info = 2;
 }
@@ -101,12 +190,12 @@ message ListTeamsResponse {
 ///////////////////////
 
 message BanTeamRequest {
-  int64 id = 1;     //teams id 
-  string reason = 2;      //Причина бана text
+  int64 id = 1; //teams id
+  string reason = 2; //Причина бана text
 }
 
 message UnbanTeamRequest {
-  int64 id = 1;     //teams id
+  int64 id = 1; //teams id
 }
 
 
@@ -118,10 +207,10 @@ message UnbanTeamRequest {
 
 enum TeamMemberChangeStatus {
   TEAM_MEMBER_CHANGE_STATUS_UNSPECIFIED = 0;
-  TEAM_MEMBER_CHANGE_STATUS_SUCCESS = 1;                // Успешно
-  TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER = 2;            // Последний участник → команда удалена
-  TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN = 3;      // Нужно выбрать нового капитана
-  TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT = 4;     // Команда участвует в турнире
+  TEAM_MEMBER_CHANGE_STATUS_SUCCESS = 1; // Успешно
+  TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER = 2; // Последний участник → команда удалена
+  TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN = 3; // Нужно выбрать нового капитана
+  TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT = 4; // Команда участвует в турнире
 }
 
 
@@ -130,6 +219,7 @@ message JoinTeamRequest {
   int64 team_id = 2;
 }
 
+//TODO: status
 //Проверяем поля: size & таблица ban
 message JoinTeamResponse {
   int64 users_teams_id = 1;
@@ -168,13 +258,12 @@ message KickFromTeamResponse {
 
 
 
-
 ///////
 //Img//
 ///////
 
 message AddTeamLogoRequest {
-  int64 team_id = 1;      // ID команды
+  int64 team_id = 1; // ID команды
   TeamLogo logo = 2;
 }
 

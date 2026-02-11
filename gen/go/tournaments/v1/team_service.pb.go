@@ -7,6 +7,7 @@
 package tournamentsv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -686,6 +687,7 @@ func (x *JoinTeamRequest) GetTeamId() int64 {
 	return 0
 }
 
+// TODO: status
 // Проверяем поля: size & таблица ban
 type JoinTeamResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1163,7 +1165,7 @@ var File_tournaments_v1_team_service_proto protoreflect.FileDescriptor
 
 const file_tournaments_v1_team_service_proto_rawDesc = "" +
 	"\n" +
-	"!tournaments/v1/team_service.proto\x12\x0etournaments.v1\x1a\x1atournaments/v1/types.proto\"\xea\x01\n" +
+	"!tournaments/v1/team_service.proto\x12\x0etournaments.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1atournaments/v1/types.proto\"\xea\x01\n" +
 	"\x11CreateTeamRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x12\n" +
 	"\x04size\x18\x02 \x01(\x05R\x04size\x12%\n" +
@@ -1261,24 +1263,24 @@ const file_tournaments_v1_team_service_proto_rawDesc = "" +
 	"!TEAM_MEMBER_CHANGE_STATUS_SUCCESS\x10\x01\x12)\n" +
 	"%TEAM_MEMBER_CHANGE_STATUS_LAST_MEMBER\x10\x02\x12/\n" +
 	"+TEAM_MEMBER_CHANGE_STATUS_NEEDS_NEW_CAPTAIN\x10\x03\x120\n" +
-	",TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT\x10\x042\xf6\a\n" +
-	"\vTeamService\x12E\n" +
+	",TEAM_MEMBER_CHANGE_STATUS_TEAM_IN_TOURNAMENT\x10\x042\x84\v\n" +
+	"\vTeamService\x12[\n" +
 	"\n" +
-	"CreateTeam\x12!.tournaments.v1.CreateTeamRequest\x1a\x14.tournaments.v1.Team\x12?\n" +
-	"\aGetTeam\x12\x1e.tournaments.v1.GetTeamRequest\x1a\x14.tournaments.v1.Team\x12U\n" +
-	"\x12GetTeamWithPlayers\x12\x1e.tournaments.v1.GetTeamRequest\x1a\x1f.tournaments.v1.TeamWithPlayers\x12E\n" +
+	"CreateTeam\x12!.tournaments.v1.CreateTeamRequest\x1a\x14.tournaments.v1.Team\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/teams\x12W\n" +
+	"\aGetTeam\x12\x1e.tournaments.v1.GetTeamRequest\x1a\x14.tournaments.v1.Team\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/v1/teams/{id}\x12u\n" +
+	"\x12GetTeamWithPlayers\x12\x1e.tournaments.v1.GetTeamRequest\x1a\x1f.tournaments.v1.TeamWithPlayers\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/teams/{id}/players\x12`\n" +
 	"\n" +
-	"UpdateTeam\x12!.tournaments.v1.UpdateTeamRequest\x1a\x14.tournaments.v1.Team\x12S\n" +
+	"UpdateTeam\x12!.tournaments.v1.UpdateTeamRequest\x1a\x14.tournaments.v1.Team\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*2\x0e/v1/teams/{id}\x12k\n" +
 	"\n" +
-	"DeleteTeam\x12!.tournaments.v1.DeleteTeamRequest\x1a\".tournaments.v1.DeleteTeamResponse\x12P\n" +
-	"\tListTeams\x12 .tournaments.v1.ListTeamsRequest\x1a!.tournaments.v1.ListTeamsResponse\x12?\n" +
-	"\aBanTeam\x12\x1e.tournaments.v1.BanTeamRequest\x1a\x14.tournaments.v1.Team\x12C\n" +
-	"\tUnbanTeam\x12 .tournaments.v1.UnbanTeamRequest\x1a\x14.tournaments.v1.Team\x12M\n" +
-	"\bJoinTeam\x12\x1f.tournaments.v1.JoinTeamRequest\x1a .tournaments.v1.JoinTeamResponse\x12P\n" +
-	"\tLeaveTeam\x12 .tournaments.v1.LeaveTeamRequest\x1a!.tournaments.v1.LeaveTeamResponse\x12Y\n" +
-	"\fKickFromTeam\x12#.tournaments.v1.KickFromTeamRequest\x1a$.tournaments.v1.KickFromTeamResponse\x12G\n" +
-	"\vAddTeamLogo\x12\".tournaments.v1.AddTeamLogoRequest\x1a\x14.tournaments.v1.Team\x12O\n" +
-	"\x0fDeleteTeamImage\x12&.tournaments.v1.DeleteImageLogoRequest\x1a\x14.tournaments.v1.TeamB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
+	"DeleteTeam\x12!.tournaments.v1.DeleteTeamRequest\x1a\".tournaments.v1.DeleteTeamResponse\"\x16\x82\xd3\xe4\x93\x02\x10*\x0e/v1/teams/{id}\x12c\n" +
+	"\tListTeams\x12 .tournaments.v1.ListTeamsRequest\x1a!.tournaments.v1.ListTeamsResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/teams\x12^\n" +
+	"\aBanTeam\x12\x1e.tournaments.v1.BanTeamRequest\x1a\x14.tournaments.v1.Team\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/teams/{id}/ban\x12d\n" +
+	"\tUnbanTeam\x12 .tournaments.v1.UnbanTeamRequest\x1a\x14.tournaments.v1.Team\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/teams/{id}/unban\x12r\n" +
+	"\bJoinTeam\x12\x1f.tournaments.v1.JoinTeamRequest\x1a .tournaments.v1.JoinTeamResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/teams/{team_id}/join\x12v\n" +
+	"\tLeaveTeam\x12 .tournaments.v1.LeaveTeamRequest\x1a!.tournaments.v1.LeaveTeamResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/teams/{team_id}/leave\x12~\n" +
+	"\fKickFromTeam\x12#.tournaments.v1.KickFromTeamRequest\x1a$.tournaments.v1.KickFromTeamResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/teams/{team_id}/kick\x12o\n" +
+	"\vAddTeamLogo\x12\".tournaments.v1.AddTeamLogoRequest\x1a\x14.tournaments.v1.Team\"&\x82\xd3\xe4\x93\x02 :\x04logo\"\x18/v1/teams/{team_id}/logo\x12q\n" +
+	"\x0fDeleteTeamImage\x12&.tournaments.v1.DeleteImageLogoRequest\x1a\x14.tournaments.v1.Team\" \x82\xd3\xe4\x93\x02\x1a*\x18/v1/teams/{team_id}/logoB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
 
 var (
 	file_tournaments_v1_team_service_proto_rawDescOnce sync.Once

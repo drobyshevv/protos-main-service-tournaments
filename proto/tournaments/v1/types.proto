@@ -24,18 +24,12 @@ message BanInfo {
   google.protobuf.Timestamp banned_at = 3;
 }
 
-message Player {
-  int64 id = 1;
-  string login = 2;
-  string avatar_url = 3;
-}
-
 message TeamWithPlayers {
   Team team = 1;
-  repeated Player players = 2;
+  repeated int64 id = 2; //UsersId from users_teams
 }
 
 message TeamLogo {
-  bytes image_data = 1;     // Бинарные данные
-  string filename = 2;      // "team-logo.jpg"
+  bytes image_data = 1; // Бинарные данные
+  string filename = 2; // "team-logo.jpg"
 }

@@ -190,77 +190,17 @@ func (x *BanInfo) GetBannedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-type Player struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Login         string                 `protobuf:"bytes,2,opt,name=login,proto3" json:"login,omitempty"`
-	AvatarUrl     string                 `protobuf:"bytes,3,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Player) Reset() {
-	*x = Player{}
-	mi := &file_tournaments_v1_types_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Player) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Player) ProtoMessage() {}
-
-func (x *Player) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_types_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Player.ProtoReflect.Descriptor instead.
-func (*Player) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *Player) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *Player) GetLogin() string {
-	if x != nil {
-		return x.Login
-	}
-	return ""
-}
-
-func (x *Player) GetAvatarUrl() string {
-	if x != nil {
-		return x.AvatarUrl
-	}
-	return ""
-}
-
 type TeamWithPlayers struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Team          *Team                  `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
-	Players       []*Player              `protobuf:"bytes,2,rep,name=players,proto3" json:"players,omitempty"`
+	Id            []int64                `protobuf:"varint,2,rep,packed,name=id,proto3" json:"id,omitempty"` //UsersId from users_teams
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TeamWithPlayers) Reset() {
 	*x = TeamWithPlayers{}
-	mi := &file_tournaments_v1_types_proto_msgTypes[3]
+	mi := &file_tournaments_v1_types_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +212,7 @@ func (x *TeamWithPlayers) String() string {
 func (*TeamWithPlayers) ProtoMessage() {}
 
 func (x *TeamWithPlayers) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_types_proto_msgTypes[3]
+	mi := &file_tournaments_v1_types_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +225,7 @@ func (x *TeamWithPlayers) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamWithPlayers.ProtoReflect.Descriptor instead.
 func (*TeamWithPlayers) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{3}
+	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TeamWithPlayers) GetTeam() *Team {
@@ -295,9 +235,9 @@ func (x *TeamWithPlayers) GetTeam() *Team {
 	return nil
 }
 
-func (x *TeamWithPlayers) GetPlayers() []*Player {
+func (x *TeamWithPlayers) GetId() []int64 {
 	if x != nil {
-		return x.Players
+		return x.Id
 	}
 	return nil
 }
@@ -312,7 +252,7 @@ type TeamLogo struct {
 
 func (x *TeamLogo) Reset() {
 	*x = TeamLogo{}
-	mi := &file_tournaments_v1_types_proto_msgTypes[4]
+	mi := &file_tournaments_v1_types_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +264,7 @@ func (x *TeamLogo) String() string {
 func (*TeamLogo) ProtoMessage() {}
 
 func (x *TeamLogo) ProtoReflect() protoreflect.Message {
-	mi := &file_tournaments_v1_types_proto_msgTypes[4]
+	mi := &file_tournaments_v1_types_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +277,7 @@ func (x *TeamLogo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamLogo.ProtoReflect.Descriptor instead.
 func (*TeamLogo) Descriptor() ([]byte, []int) {
-	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{4}
+	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *TeamLogo) GetImageData() []byte {
@@ -375,15 +315,10 @@ const file_tournaments_v1_types_proto_rawDesc = "" +
 	"\aBanInfo\x12\x15\n" +
 	"\x06ban_id\x18\x01 \x01(\x03R\x05banId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x127\n" +
-	"\tbanned_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\bbannedAt\"M\n" +
-	"\x06Player\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05login\x18\x02 \x01(\tR\x05login\x12\x1d\n" +
-	"\n" +
-	"avatar_url\x18\x03 \x01(\tR\tavatarUrl\"m\n" +
+	"\tbanned_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\bbannedAt\"K\n" +
 	"\x0fTeamWithPlayers\x12(\n" +
-	"\x04team\x18\x01 \x01(\v2\x14.tournaments.v1.TeamR\x04team\x120\n" +
-	"\aplayers\x18\x02 \x03(\v2\x16.tournaments.v1.PlayerR\aplayers\"E\n" +
+	"\x04team\x18\x01 \x01(\v2\x14.tournaments.v1.TeamR\x04team\x12\x0e\n" +
+	"\x02id\x18\x02 \x03(\x03R\x02id\"E\n" +
 	"\bTeamLogo\x12\x1d\n" +
 	"\n" +
 	"image_data\x18\x01 \x01(\fR\timageData\x12\x1a\n" +
@@ -401,25 +336,23 @@ func file_tournaments_v1_types_proto_rawDescGZIP() []byte {
 	return file_tournaments_v1_types_proto_rawDescData
 }
 
-var file_tournaments_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_tournaments_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_tournaments_v1_types_proto_goTypes = []any{
 	(*Team)(nil),                  // 0: tournaments.v1.Team
 	(*BanInfo)(nil),               // 1: tournaments.v1.BanInfo
-	(*Player)(nil),                // 2: tournaments.v1.Player
-	(*TeamWithPlayers)(nil),       // 3: tournaments.v1.TeamWithPlayers
-	(*TeamLogo)(nil),              // 4: tournaments.v1.TeamLogo
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*TeamWithPlayers)(nil),       // 2: tournaments.v1.TeamWithPlayers
+	(*TeamLogo)(nil),              // 3: tournaments.v1.TeamLogo
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_tournaments_v1_types_proto_depIdxs = []int32{
 	1, // 0: tournaments.v1.Team.ban_info:type_name -> tournaments.v1.BanInfo
-	5, // 1: tournaments.v1.BanInfo.banned_at:type_name -> google.protobuf.Timestamp
+	4, // 1: tournaments.v1.BanInfo.banned_at:type_name -> google.protobuf.Timestamp
 	0, // 2: tournaments.v1.TeamWithPlayers.team:type_name -> tournaments.v1.Team
-	2, // 3: tournaments.v1.TeamWithPlayers.players:type_name -> tournaments.v1.Player
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_tournaments_v1_types_proto_init() }
@@ -434,7 +367,7 @@ func file_tournaments_v1_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tournaments_v1_types_proto_rawDesc), len(file_tournaments_v1_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
