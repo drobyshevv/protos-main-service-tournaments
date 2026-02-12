@@ -294,6 +294,74 @@ func (x *TeamLogo) GetFilename() string {
 	return ""
 }
 
+type UsersTeams struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UsersId       int64                  `protobuf:"varint,2,opt,name=users_id,json=usersId,proto3" json:"users_id,omitempty"`
+	TeamsId       int64                  `protobuf:"varint,3,opt,name=teams_id,json=teamsId,proto3" json:"teams_id,omitempty"`
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UsersTeams) Reset() {
+	*x = UsersTeams{}
+	mi := &file_tournaments_v1_types_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UsersTeams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UsersTeams) ProtoMessage() {}
+
+func (x *UsersTeams) ProtoReflect() protoreflect.Message {
+	mi := &file_tournaments_v1_types_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UsersTeams.ProtoReflect.Descriptor instead.
+func (*UsersTeams) Descriptor() ([]byte, []int) {
+	return file_tournaments_v1_types_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UsersTeams) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UsersTeams) GetUsersId() int64 {
+	if x != nil {
+		return x.UsersId
+	}
+	return 0
+}
+
+func (x *UsersTeams) GetTeamsId() int64 {
+	if x != nil {
+		return x.TeamsId
+	}
+	return 0
+}
+
+func (x *UsersTeams) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 var File_tournaments_v1_types_proto protoreflect.FileDescriptor
 
 const file_tournaments_v1_types_proto_rawDesc = "" +
@@ -322,7 +390,13 @@ const file_tournaments_v1_types_proto_rawDesc = "" +
 	"\bTeamLogo\x12\x1d\n" +
 	"\n" +
 	"image_data\x18\x01 \x01(\fR\timageData\x12\x1a\n" +
-	"\bfilename\x18\x02 \x01(\tR\bfilenameB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
+	"\bfilename\x18\x02 \x01(\tR\bfilename\"j\n" +
+	"\n" +
+	"UsersTeams\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
+	"\busers_id\x18\x02 \x01(\x03R\ausersId\x12\x19\n" +
+	"\bteams_id\x18\x03 \x01(\x03R\ateamsId\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06statusB[ZYgithub.com/drobyshevv/protos-main-service-tournaments/go/gen/tournaments/v1;tournamentsv1b\x06proto3"
 
 var (
 	file_tournaments_v1_types_proto_rawDescOnce sync.Once
@@ -336,17 +410,18 @@ func file_tournaments_v1_types_proto_rawDescGZIP() []byte {
 	return file_tournaments_v1_types_proto_rawDescData
 }
 
-var file_tournaments_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_tournaments_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_tournaments_v1_types_proto_goTypes = []any{
 	(*Team)(nil),                  // 0: tournaments.v1.Team
 	(*BanInfo)(nil),               // 1: tournaments.v1.BanInfo
 	(*TeamWithPlayers)(nil),       // 2: tournaments.v1.TeamWithPlayers
 	(*TeamLogo)(nil),              // 3: tournaments.v1.TeamLogo
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*UsersTeams)(nil),            // 4: tournaments.v1.UsersTeams
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_tournaments_v1_types_proto_depIdxs = []int32{
 	1, // 0: tournaments.v1.Team.ban_info:type_name -> tournaments.v1.BanInfo
-	4, // 1: tournaments.v1.BanInfo.banned_at:type_name -> google.protobuf.Timestamp
+	5, // 1: tournaments.v1.BanInfo.banned_at:type_name -> google.protobuf.Timestamp
 	0, // 2: tournaments.v1.TeamWithPlayers.team:type_name -> tournaments.v1.Team
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
@@ -367,7 +442,7 @@ func file_tournaments_v1_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tournaments_v1_types_proto_rawDesc), len(file_tournaments_v1_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

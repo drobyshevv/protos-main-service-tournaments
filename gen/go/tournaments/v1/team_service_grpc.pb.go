@@ -63,7 +63,7 @@ type TeamServiceClient interface {
 	UnbanTeam(ctx context.Context, in *UnbanTeamRequest, opts ...grpc.CallOption) (*Team, error)
 	// JoinTeam добавляет пользователя в команду, если есть свободные места
 	// и команда не находится в бане.
-	JoinTeam(ctx context.Context, in *JoinTeamRequest, opts ...grpc.CallOption) (*JoinTeamResponse, error)
+	JoinTeam(ctx context.Context, in *JoinTeamRequest, opts ...grpc.CallOption) (*UsersTeams, error)
 	// LeaveTeam удаляет пользователя из команды.
 	// Если пользователь является капитаном, может потребоваться назначение нового капитана.
 	LeaveTeam(ctx context.Context, in *LeaveTeamRequest, opts ...grpc.CallOption) (*LeaveTeamResponse, error)
@@ -164,9 +164,9 @@ func (c *teamServiceClient) UnbanTeam(ctx context.Context, in *UnbanTeamRequest,
 	return out, nil
 }
 
-func (c *teamServiceClient) JoinTeam(ctx context.Context, in *JoinTeamRequest, opts ...grpc.CallOption) (*JoinTeamResponse, error) {
+func (c *teamServiceClient) JoinTeam(ctx context.Context, in *JoinTeamRequest, opts ...grpc.CallOption) (*UsersTeams, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JoinTeamResponse)
+	out := new(UsersTeams)
 	err := c.cc.Invoke(ctx, TeamService_JoinTeam_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -243,7 +243,7 @@ type TeamServiceServer interface {
 	UnbanTeam(context.Context, *UnbanTeamRequest) (*Team, error)
 	// JoinTeam добавляет пользователя в команду, если есть свободные места
 	// и команда не находится в бане.
-	JoinTeam(context.Context, *JoinTeamRequest) (*JoinTeamResponse, error)
+	JoinTeam(context.Context, *JoinTeamRequest) (*UsersTeams, error)
 	// LeaveTeam удаляет пользователя из команды.
 	// Если пользователь является капитаном, может потребоваться назначение нового капитана.
 	LeaveTeam(context.Context, *LeaveTeamRequest) (*LeaveTeamResponse, error)
@@ -288,7 +288,7 @@ func (UnimplementedTeamServiceServer) BanTeam(context.Context, *BanTeamRequest) 
 func (UnimplementedTeamServiceServer) UnbanTeam(context.Context, *UnbanTeamRequest) (*Team, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnbanTeam not implemented")
 }
-func (UnimplementedTeamServiceServer) JoinTeam(context.Context, *JoinTeamRequest) (*JoinTeamResponse, error) {
+func (UnimplementedTeamServiceServer) JoinTeam(context.Context, *JoinTeamRequest) (*UsersTeams, error) {
 	return nil, status.Error(codes.Unimplemented, "method JoinTeam not implemented")
 }
 func (UnimplementedTeamServiceServer) LeaveTeam(context.Context, *LeaveTeamRequest) (*LeaveTeamResponse, error) {
