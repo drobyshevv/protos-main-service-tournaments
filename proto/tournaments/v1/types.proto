@@ -33,3 +33,10 @@ message TeamLogo {
   bytes image_data = 1; // Бинарные данные
   string filename = 2; // "team-logo.jpg"
 }
+
+message UsersTeams {
+  int64 id = 1;
+  int64 users_id = 2;
+  int64 teams_id = 3;
+  string status = 4;
+}
